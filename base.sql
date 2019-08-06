@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 31/07/2019 09:58:17
+ Date: 06/08/2019 11:00:54
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `fa_admin`  (
 -- ----------------------------
 -- Records of fa_admin
 -- ----------------------------
-INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1564365731, 1492186163, 1564365731, '1c588a97-e6fa-4533-992f-3921ef325d31', 'normal');
+INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1565060118, 1492186163, 1565060118, '393aa183-7c75-4ca5-a83b-2c4c36657460', 'normal');
 
 -- ----------------------------
 -- Table structure for fa_admin_log
@@ -60,38 +60,7 @@ CREATE TABLE `fa_admin_log`  (
   `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of fa_admin_log
--- ----------------------------
-INSERT INTO `fa_admin_log` VALUES (1, 1, 'admin', '/index.php/admin/index/login', 'Login', '{\"__token__\":\"806f23bcd2cb9989d43314c839547049\",\"username\":\"admin\",\"captcha\":\"mxmk\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372000);
-INSERT INTO `fa_admin_log` VALUES (2, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"command\",\"force\":\"0\",\"uid\":\"0\",\"token\":\"\",\"version\":\"1.0.5\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372256);
-INSERT INTO `fa_admin_log` VALUES (3, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372256);
-INSERT INTO `fa_admin_log` VALUES (4, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"crontab\",\"force\":\"0\",\"uid\":\"0\",\"token\":\"\",\"version\":\"1.0.2\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372283);
-INSERT INTO `fa_admin_log` VALUES (5, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372283);
-INSERT INTO `fa_admin_log` VALUES (6, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"filemanager\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"00c42c45-c0ff-483e-b7db-ec42598e3b11\",\"version\":\"1.0.2\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372777);
-INSERT INTO `fa_admin_log` VALUES (7, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372777);
-INSERT INTO `fa_admin_log` VALUES (8, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"geetest\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"00c42c45-c0ff-483e-b7db-ec42598e3b11\",\"version\":\"1.0.0\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372828);
-INSERT INTO `fa_admin_log` VALUES (9, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372828);
-INSERT INTO `fa_admin_log` VALUES (10, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"address\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"00c42c45-c0ff-483e-b7db-ec42598e3b11\",\"version\":\"1.0.3\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372844);
-INSERT INTO `fa_admin_log` VALUES (11, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372844);
-INSERT INTO `fa_admin_log` VALUES (12, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"log\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"00c42c45-c0ff-483e-b7db-ec42598e3b11\",\"version\":\"1.0.2\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372853);
-INSERT INTO `fa_admin_log` VALUES (13, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372853);
-INSERT INTO `fa_admin_log` VALUES (14, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"cropper\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"00c42c45-c0ff-483e-b7db-ec42598e3b11\",\"version\":\"1.0.1\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372867);
-INSERT INTO `fa_admin_log` VALUES (15, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372867);
-INSERT INTO `fa_admin_log` VALUES (16, 1, 'admin', '/index.php/admin/ajax/upload', '', '{\"name\":\"lzqqdy.jpg\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372970);
-INSERT INTO `fa_admin_log` VALUES (17, 1, 'admin', '/index.php/admin/general.profile/update', '常规管理 个人资料 更新个人信息', '{\"row\":{\"avatar\":\"\\/uploads\\/20190717\\/479b888adad78a4fde5a83fdc93de835.jpg\",\"email\":\"admin@admin.com\",\"nickname\":\"Admin\",\"password\":\"\"}}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563372971);
-INSERT INTO `fa_admin_log` VALUES (18, 1, 'admin', '/index.php/admin/command/get_field_list', '', '{\"table\":\"fa_admin\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563373011);
-INSERT INTO `fa_admin_log` VALUES (19, 1, 'admin', '/', '登录', '{\"__token__\":\"4796eb569d0d251f21fc943004ab7d35\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"604a71e99cfa0e0a53a5dc7531c5fd02hz\",\"geetest_validate\":\"d6887650cab0ef9e14e1c47ab28a8d60\",\"geetest_seccode\":\"d6887650cab0ef9e14e1c47ab28a8d60|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563373143);
-INSERT INTO `fa_admin_log` VALUES (20, 1, 'admin', '/', '登录', '{\"__token__\":\"a41ae0257cdb85f1bf00902d4d095d7d\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"1aceb39082509c71debfc0fd970dac35iz\",\"geetest_validate\":\"bca49326c606fb891ca1af304d28ce87\",\"geetest_seccode\":\"bca49326c606fb891ca1af304d28ce87|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36', 1563373184);
-INSERT INTO `fa_admin_log` VALUES (21, 0, 'Unknown', '/', '', '{\"__token__\":\"0187cb83a2eb36d01d3e0f41056204c1\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"\",\"geetest_validate\":\"\",\"geetest_seccode\":\"\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564105534);
-INSERT INTO `fa_admin_log` VALUES (22, 1, 'admin', '/', '登录', '{\"__token__\":\"f7442407a000681e4b71f58b1d0fb701\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"88890d6dcae73dc285b23624cb1abeac5m\",\"geetest_validate\":\"093a3c76699b220acd7ad6b807cbeb0c\",\"geetest_seccode\":\"093a3c76699b220acd7ad6b807cbeb0c|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564105549);
-INSERT INTO `fa_admin_log` VALUES (23, 1, 'admin', '/admin/addon/install', '插件管理 安装', '{\"name\":\"faqueue\",\"force\":\"0\",\"uid\":\"5992\",\"token\":\"6d60fb4c-c434-46cc-ac7c-01f9c04b7f0c\",\"version\":\"1.0.1\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564122084);
-INSERT INTO `fa_admin_log` VALUES (24, 1, 'admin', '/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564122085);
-INSERT INTO `fa_admin_log` VALUES (25, 1, 'admin', '/?url=%2Fadmin%2Faddon%3Fref%3Daddtabs', '登录', '{\"url\":\"\\/admin\\/addon?ref=addtabs\",\"__token__\":\"0464df21c130b3f1559edd60ea9f545a\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"cf4db03cd32edd40a68f3d07f1a54a227t\",\"geetest_validate\":\"79841f203784cd24d073f8d9cc5272cc\",\"geetest_seccode\":\"79841f203784cd24d073f8d9cc5272cc|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564130628);
-INSERT INTO `fa_admin_log` VALUES (26, 1, 'admin', '/', '登录', '{\"__token__\":\"e64f1354d47485750b568802934354cc\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"26b94960370834f5d971220a4a99a0fc3m\",\"geetest_validate\":\"9f0f9ce6281e778b4d1221c6a97597df\",\"geetest_seccode\":\"9f0f9ce6281e778b4d1221c6a97597df|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564365731);
-INSERT INTO `fa_admin_log` VALUES (27, 1, 'admin', '/admin/auth/group/roletree', '', '{\"pid\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1564365760);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for fa_attachment
@@ -186,7 +155,7 @@ CREATE TABLE `fa_auth_rule`  (
   UNIQUE INDEX `name`(`name`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE,
   INDEX `weigh`(`weigh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_auth_rule
@@ -288,15 +257,10 @@ INSERT INTO `fa_auth_rule` VALUES (94, 'file', 92, 'general/crontab/add', '添�
 INSERT INTO `fa_auth_rule` VALUES (95, 'file', 92, 'general/crontab/edit', '编辑 ', 'fa fa-circle-o', '', '', 0, 1563372283, 1563372283, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (96, 'file', 92, 'general/crontab/del', '删除', 'fa fa-circle-o', '', '', 0, 1563372283, 1563372283, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (97, 'file', 92, 'general/crontab/multi', '批量更新', 'fa fa-circle-o', '', '', 0, 1563372283, 1563372283, 0, 'normal');
-INSERT INTO `fa_auth_rule` VALUES (98, 'file', 2, 'general/filemanager', '文件管理', 'fa fa-file', '', '', 1, 1563372777, 1563372777, 0, 'normal');
-INSERT INTO `fa_auth_rule` VALUES (99, 'file', 98, 'general/filemanager/index', '查看', 'fa fa-circle-o', '', '', 0, 1563372777, 1563372777, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (100, 'file', 2, 'general/logs', '日志管理', 'fa fa-pied-piper-alt', '', '', 1, 1563372853, 1563372853, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (101, 'file', 100, 'general/logs/index', '查看', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (102, 'file', 100, 'general/logs/del', '删除', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (103, 'file', 100, 'general/logs/detail', '详情', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
-INSERT INTO `fa_auth_rule` VALUES (104, 'file', 0, 'faqueue', '消息队列', 'fa fa-list', '', '消息队列', 1, 1564122084, 1564122084, 0, 'normal');
-INSERT INTO `fa_auth_rule` VALUES (105, 'file', 104, 'faqueue/log', '任务完成记录', 'fa fa-list', '', '', 1, 1564122084, 1564122084, 0, 'normal');
-INSERT INTO `fa_auth_rule` VALUES (106, 'file', 105, 'faqueue/log/index', '查看', 'fa fa-circle-o', '', '', 0, 1564122084, 1564122084, 0, 'normal');
 
 -- ----------------------------
 -- Table structure for fa_category
@@ -325,19 +289,19 @@ CREATE TABLE `fa_category`  (
 -- ----------------------------
 -- Records of fa_category
 -- ----------------------------
-INSERT INTO `fa_category` VALUES (1, 0, 'page', '官方新闻', 'news', 'recommend', '/assets/img/qrcode.png', '', '', 'news', 1495262190, 1495262190, 1, 'normal');
-INSERT INTO `fa_category` VALUES (2, 0, 'page', '移动应用', 'mobileapp', 'hot', '/assets/img/qrcode.png', '', '', 'mobileapp', 1495262244, 1495262244, 2, 'normal');
+INSERT INTO `fa_category` VALUES (1, 0, 'page', '官方新闻', 'news', 'recommend', '/assets/img/qrcode.png', '', '', 'news', 1495262190, 1495262190, 5, 'normal');
+INSERT INTO `fa_category` VALUES (2, 0, 'page', '移动应用', 'mobileapp', 'hot', '/assets/img/qrcode.png', '', '', 'mobileapp', 1495262244, 1495262244, 1, 'normal');
 INSERT INTO `fa_category` VALUES (3, 2, 'page', '微信公众号', 'wechatpublic', 'index', '/assets/img/qrcode.png', '', '', 'wechatpublic', 1495262288, 1495262288, 3, 'normal');
 INSERT INTO `fa_category` VALUES (4, 2, 'page', 'Android开发', 'android', 'recommend', '/assets/img/qrcode.png', '', '', 'android', 1495262317, 1495262317, 4, 'normal');
-INSERT INTO `fa_category` VALUES (5, 0, 'page', '软件产品', 'software', 'recommend', '/assets/img/qrcode.png', '', '', 'software', 1495262336, 1499681850, 5, 'normal');
-INSERT INTO `fa_category` VALUES (6, 5, 'page', '网站建站', 'website', 'recommend', '/assets/img/qrcode.png', '', '', 'website', 1495262357, 1495262357, 6, 'normal');
-INSERT INTO `fa_category` VALUES (7, 5, 'page', '企业管理软件', 'company', 'index', '/assets/img/qrcode.png', '', '', 'company', 1495262391, 1495262391, 7, 'normal');
+INSERT INTO `fa_category` VALUES (5, 0, 'page', '软件产品', 'software', 'recommend', '/assets/img/qrcode.png', '', '', 'software', 1495262336, 1499681850, 2, 'normal');
+INSERT INTO `fa_category` VALUES (6, 5, 'page', '网站建站', 'website', 'recommend', '/assets/img/qrcode.png', '', '', 'website', 1495262357, 1495262357, 7, 'normal');
+INSERT INTO `fa_category` VALUES (7, 5, 'page', '企业管理软件', 'company', 'index', '/assets/img/qrcode.png', '', '', 'company', 1495262391, 1495262391, 6, 'normal');
 INSERT INTO `fa_category` VALUES (8, 6, 'page', 'PC端', 'website-pc', 'recommend', '/assets/img/qrcode.png', '', '', 'website-pc', 1495262424, 1495262424, 8, 'normal');
 INSERT INTO `fa_category` VALUES (9, 6, 'page', '移动端', 'website-mobile', 'recommend', '/assets/img/qrcode.png', '', '', 'website-mobile', 1495262456, 1495262456, 9, 'normal');
 INSERT INTO `fa_category` VALUES (10, 7, 'page', 'CRM系统 ', 'company-crm', 'recommend', '/assets/img/qrcode.png', '', '', 'company-crm', 1495262487, 1495262487, 10, 'normal');
 INSERT INTO `fa_category` VALUES (11, 7, 'page', 'SASS平台软件', 'company-sass', 'recommend', '/assets/img/qrcode.png', '', '', 'company-sass', 1495262515, 1495262515, 11, 'normal');
-INSERT INTO `fa_category` VALUES (12, 0, 'test', '测试1', 'test1', 'recommend', '/assets/img/qrcode.png', '', '', 'test1', 1497015727, 1497015727, 12, 'normal');
-INSERT INTO `fa_category` VALUES (13, 0, 'test', '测试2', 'test2', 'recommend', '/assets/img/qrcode.png', '', '', 'test2', 1497015738, 1497015738, 13, 'normal');
+INSERT INTO `fa_category` VALUES (12, 0, 'test', '测试1', 'test1', 'recommend', '/assets/img/qrcode.png', '', '', 'test1', 1497015727, 1497015727, 13, 'normal');
+INSERT INTO `fa_category` VALUES (13, 0, 'test', '测试2', 'test2', 'recommend', '/assets/img/qrcode.png', '', '', 'test2', 1497015738, 1497015738, 12, 'normal');
 
 -- ----------------------------
 -- Table structure for fa_command
@@ -373,7 +337,7 @@ CREATE TABLE `fa_config`  (
   `extend` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '扩展属性',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统配置' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统配置' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_config
@@ -387,7 +351,7 @@ INSERT INTO `fa_config` VALUES (6, 'forbiddenip', 'basic', 'Forbidden ip', '一�
 INSERT INTO `fa_config` VALUES (7, 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
 INSERT INTO `fa_config` VALUES (8, 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
 INSERT INTO `fa_config` VALUES (9, 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
-INSERT INTO `fa_config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\"}', '', '', '');
+INSERT INTO `fa_config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"WeChat\":\"小程序配置\",\"Payment\":\"支付配置\"}', '', '', '');
 INSERT INTO `fa_config` VALUES (11, 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
 INSERT INTO `fa_config` VALUES (12, 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
 INSERT INTO `fa_config` VALUES (13, 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
@@ -395,6 +359,10 @@ INSERT INTO `fa_config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user',
 INSERT INTO `fa_config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
 INSERT INTO `fa_config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
 INSERT INTO `fa_config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
+INSERT INTO `fa_config` VALUES (18, 'app_id', 'WeChat', '小程序appid', '填写小程序appid', 'string', '1', '', '', '');
+INSERT INTO `fa_config` VALUES (19, 'app_secret', 'WeChat', '小程序AppSecret', '填写小程序AppSecret', 'string', '1', '', '', '');
+INSERT INTO `fa_config` VALUES (20, 'app_mch_id', 'Payment', '商户账号', '填写商户账号', 'string', '1', '', '', '');
+INSERT INTO `fa_config` VALUES (21, 'app_key', 'Payment', '商户密钥', '填写商户密钥', 'string', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for fa_crontab
@@ -439,36 +407,6 @@ CREATE TABLE `fa_ems`  (
   `createtime` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '邮箱验证码表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for fa_faqueue_jobs
--- ----------------------------
-DROP TABLE IF EXISTS `fa_faqueue_jobs`;
-CREATE TABLE `fa_faqueue_jobs`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `queue` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED NULL DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for fa_faqueue_log
--- ----------------------------
-DROP TABLE IF EXISTS `fa_faqueue_log`;
-CREATE TABLE `fa_faqueue_log`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `queue` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '队列名',
-  `job` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '执行类',
-  `data` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '任务数据',
-  `create_time` int(10) NULL DEFAULT NULL COMMENT '开始执行时间',
-  `update_time` int(10) NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for fa_sms
