@@ -25,7 +25,8 @@
         "karsonzhang/fastadmin-addons": "~1.1.9",
         "overtrue/pinyin": "~3.0",
         "phpoffice/phpspreadsheet": "^1.2",
-        "topthink/think-helper": "^3.1"
+        "topthink/think-helper": "^3.1",
+        "lzqqdy/tools": "~2.21"
     },
     "config": {
         "preferred-install": "dist"

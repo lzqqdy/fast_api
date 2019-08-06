@@ -13,7 +13,7 @@ use think\Route;
 
 
 //跟域名转到后台登陆
-Route::any('', 'admin/Index/login');
+Route::any('', 'admin/Index/index');
 
 //api路由分组
 Route::group('api', function () {
