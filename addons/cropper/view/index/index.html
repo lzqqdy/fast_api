@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片剪裁示例</title>
+    <link href="__CDN__/assets/css/frontend{$Think.config.app_debug?'':'.min'}.css?v={$Think.config.site.version}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="__CDN__/assets/js/html5shiv.js"></script>
+    <script src="__CDN__/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="__ADDON__/css/cropper.css">
+    <link rel="stylesheet" href="__ADDON__/css/main.css">
+</head>
+<body>
+
+<script type="text/javascript">
+    var require = {
+        config: {$jsconfig|json_encode}
+    };
+</script>
+
+<!-- Content -->
+<div class="container">
+    <div class="clearfix">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2 id="navbar">头像剪裁示例</h2>
+                </div>
+
+                <div class="">
+
+                    <form id="cropper-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <legend>添加</legend>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-1">单图:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                    <input id="c-image" data-rule="required" class="form-control" size="50" name="row[image]" type="text" value="https://cn.bing.com/th?id=OHR.GOTPath_ZH-CN1955635212_1920x1080.jpg">
+                                    <div class="input-group-addon no-border no-padding">
+                                        <span><button type="button" id="plupload-image" class="btn btn-danger plupload cropper" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                        <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                                    </div>
+                                    <span class="msg-box n-right" for="c-image"></span>
+                                </div>
+                                <ul class="row list-inline plupload-preview" id="p-image"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-1">多图:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                    <input id="c-images" class="form-control" size="50" name="row[images]" type="text" value="https://cn.bing.com/th?id=OHR.GOTPath_ZH-CN1955635212_1920x1080.jpg,https://cn.bing.com/th?id=OHR.BigWindDay_ZH-CN1837859776_1920x1080.jpg,https://cn.bing.com/th?id=OHR.YukonEmerald_ZH-CN1893750172_1920x1080.jpg,">
+                                    <div class="input-group-addon no-border no-padding">
+                                        <span><button type="button" id="plupload-images" class="btn btn-danger plupload cropper" data-input-id="c-images" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="true" data-preview-id="p-images"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                        <span><button type="button" id="fachoose-images" class="btn btn-primary fachoose" data-input-id="c-images" data-mimetype="image/*" data-multiple="true"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                                    </div>
+                                    <span class="msg-box n-right" for="c-images"></span>
+                                </div>
+                                <ul class="row list-inline plupload-preview" id="p-images"></ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="page-header">
+                    <h2 id="code">调用代码</h2>
+                </div>
+                <div>
+                    <p>
+                    我们只需要简单的给上传按钮的class添加上cropper这个值即可
+                    </p>
+                </div>
+                <div>
+                    <textarea name="" id="" cols="30" rows="17" class="form-control">
+<div class="form-group">
+    <label class="control-label col-xs-12 col-sm-2">单图:</label>
+    <div class="col-xs-12 col-sm-8">
+        <div class="input-group">
+            <input id="c-image" data-rule="required" class="form-control" size="50" name="row[image]" type="text" value="">
+            <div class="input-group-addon no-border no-padding">
+                <span><button type="button" id="plupload-image" class="btn btn-danger plupload cropper" data-aspect-ratio="0.75" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+            </div>
+            <span class="msg-box n-right" for="c-image"></span>
+        </div>
+        <ul class="row list-inline plupload-preview" id="p-image"></ul>
+    </div>
+</div>
+                    </textarea>
+                </div>
+                <div class="page-header">
+                    <h2 id="options">剪裁参数</h2>
+                </div>
+                <div class="alert alert-warning-light">
+                    <pre style="padding:5px;word-break: break-all;word-wrap: break-word;white-space:normal">
+                    <xmp style="padding:0;word-break: break-all;word-wrap: break-word;white-space:normal">
+<button type="button" id="plupload-data" class="btn btn-danger plupload cropper" data-aspect-ratio="0.75" data-auto-crop-area="50%" data-cropped-width="300" data-cropped-height="300" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> Upload</button>
+                    </xmp>
+                        </pre>
+                </div>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>示例</th>
+                        <th>说明</th>
+                        <th>默认</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-danger">
+                        <td>aspectRatio</td>
+                        <td>data-aspect-ratio="0.8"</td>
+                        <td>比例</td>
+                        <td>0.8</td>
+                    </tr>
+                    <tr>
+                        <td>autoCropArea</td>
+                        <td>data-auto-crop-area="0.8"</td>
+                        <td>默认自动剪裁的区域大小</td>
+                        <td>0.8</td>
+                    </tr>
+                    <tr>
+                        <td>cropBoxMovable</td>
+                        <td>data-crop-box-movable="1"</td>
+                        <td>剪裁框是否可移动</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>cropBoxResizable</td>
+                        <td>data-crop-box-resizable="1"</td>
+                        <td>剪裁框是否可变大小</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>minCropBoxWidth</td>
+                        <td>data-min-crop-box-width="0"</td>
+                        <td>最小剪裁框宽度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>minCropBoxHeight</td>
+                        <td>data-min-crop-box-height="0"</td>
+                        <td>最小剪裁框高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>minContainerWidth</td>
+                        <td>data-min-container-width="0"</td>
+                        <td>最小窗口宽度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>minContainerHeight</td>
+                        <td>data-min-container-height="0"</td>
+                        <td>最小窗口高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>minCanvasHeight</td>
+                        <td>data-min-canvas-height="0"</td>
+                        <td>最小画布宽度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>minCanvasWidth</td>
+                        <td>data-min-canvas-width="0"</td>
+                        <td>最小画布高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="text-danger">
+                        <td>croppedWidth</td>
+                        <td>data-cropped-width="300"</td>
+                        <td>剪裁输出宽度</td>
+                        <td>实际宽度</td>
+                    </tr>
+                    <tr class="text-danger">
+                        <td>croppedHeight</td>
+                        <td>data-cropped-height="300"</td>
+                        <td>剪裁输出宽度</td>
+                        <td>实际高度</td>
+                    </tr>
+                    <tr>
+                        <td>croppedMinWidth</td>
+                        <td>data-cropped-min-width="400"</td>
+                        <td>最小画布高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>croppedMinHeight</td>
+                        <td>data-cropped-min-height="400"</td>
+                        <td>最小画布高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>croppedMaxWidth</td>
+                        <td>data-cropped-max-width="500"</td>
+                        <td>最大画布高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>croppedMaxHeight</td>
+                        <td>data-cropped-max-height="300"</td>
+                        <td>最大画布高度</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>fillColor</td>
+                        <td>data-fill-color="ffffff"</td>
+                        <td>背景填充色，默认为透明</td>
+                        <td>transparent</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="page-header">
+                    <h2 id="thanks">特别感谢</h2>
+                </div>
+                <div class="alert alert-danger-light">
+                    Cropper.js：<a href="https://github.com/fengyuanchen/cropper" target="_blank">https://github.com/fengyuanchen/cropper</a><br>
+                    QQ小伙伴：CARPE DIEM
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    require.callback = function () {
+        define('cropper', ['jquery', 'bootstrap', 'frontend', 'template', 'form'], function ($, undefined, Frontend, Template, Form) {
+            var Controller = {
+                index: function () {
+                    console.log(123);
+                    Form.api.bindevent("#cropper-form");
+                }
+            };
+            return Controller;
+        });
+    };
+</script>
+
+<script src="__CDN__/assets/js/require{$Think.config.app_debug?'':'.min'}.js" data-main="__CDN__/assets/js/require-frontend{$Think.config.app_debug?'':'.min'}.js?v={$site.version}"></script>
+</body>
+</html>

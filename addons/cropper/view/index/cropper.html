@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片剪裁</title>
+    <link href="__CDN__/assets/css/frontend{$Think.config.app_debug?'':'.min'}.css?v={$Think.config.site.version}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="__CDN__/assets/js/html5shiv.js"></script>
+    <script src="__CDN__/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="__ADDON__/css/cropper.css">
+    <link rel="stylesheet" href="__ADDON__/css/main.css">
+</head>
+<body style="padding:20px;">
+
+<script type="text/javascript">
+    var require = {
+        config: {$jsconfig|json_encode}
+    };
+</script>
+
+<!-- Content -->
+<div class="">
+    <div class="row">
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <!-- <h3>Demo:</h3> -->
+            <div class="img-container">
+                <img id="image" src="{$Think.get.url|cdnurl}"/>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0;padding-right:0;">
+            <!-- <h3>Preview:</h3> -->
+            <div class="docs-preview clearfix">
+                <div class="img-preview preview-lg"></div>
+                <div class="img-preview preview-md"></div>
+                <div class="img-preview preview-sm"></div>
+                <div class="img-preview preview-xs"></div>
+            </div>
+
+            <!-- <h3>Data:</h3> -->
+            <div class="docs-data">
+                <div class="input-group input-group-sm hidden">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataX">X</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataX" placeholder="x">
+                            <span class="input-group-append">
+                      <span class="input-group-text">px</span>
+                    </span>
+                </div>
+                <div class="input-group input-group-sm hidden">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataY">Y</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataY" placeholder="y">
+                            <span class="input-group-append">
+                      <span class="input-group-text">px</span>
+                    </span>
+                </div>
+
+                {if !$Think.get.aspectRatio}
+                <div class="input-group input-group-sm">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataWidth">宽度</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataWidth" placeholder="width">
+                            <span class="input-group-append">
+                      <span class="input-group-text">px</span>
+                    </span>
+                </div>
+
+                <div class="input-group input-group-sm">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataHeight">高度</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataHeight" placeholder="height">
+                            <span class="input-group-append">
+                      <span class="input-group-text">px</span>
+                    </span>
+                </div>
+                {/if}
+
+                <div class="input-group input-group-sm hidden">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataRotate">旋转</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                            <span class="input-group-append">
+                      <span class="input-group-text">deg</span>
+                    </span>
+                </div>
+                <div class="input-group input-group-sm hidden">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataScaleX">水平位置</label>
+                    </span>
+                            <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+                        </div>
+                        <div class="input-group input-group-sm hidden">
+                    <span class="input-group-prepend">
+                      <label class="input-group-text" for="dataScaleY">垂直位置</label>
+                    </span>
+                    <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+                </div>
+            </div>
+            {if !$Think.get.aspectRatio}
+            <div class="docs-toggles">
+            <div class="btn-group d-flex flex-nowrap" data-toggle="buttons" style="margin-top:30px;">
+                <label class="btn btn-primary active">
+                    <input type="radio" class="sr-only" id="aspectRatio0" name="aspectRatio" value="1.7777777777777777">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="比例: 16 / 9">
+                      16:9
+                    </span>
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.3333333333333333">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="比例: 4 / 3">
+                      4:3
+                    </span>
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="比例: 1 / 1">
+                      1:1
+                    </span>
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="比例: 2 / 3">
+                      2:3
+                    </span>
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" class="sr-only" id="aspectRatio4" name="aspectRatio" value="NaN">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="比例: NaN">
+                      无限制
+                    </span>
+                </label>
+            </div>
+            </div>
+            {/if}
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-sm-9 col-xs-9 docs-buttons">
+            <!-- <h3>Toolbar:</h3> -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="移动">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="移动">
+              <span class="fa fa-arrows"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="剪裁">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="剪裁">
+              <span class="fa fa-crop"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="缩小">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="缩小">
+              <span class="fa fa-search-plus"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="放大">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="放大">
+              <span class="fa fa-search-minus"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="左移">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="左移">
+              <span class="fa fa-arrow-left"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="右移">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="右移">
+              <span class="fa fa-arrow-right"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="上移">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="上移">
+              <span class="fa fa-arrow-up"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="下移">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="下移">
+              <span class="fa fa-arrow-down"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="-90" title="向左翻转">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="向右翻转">
+              <span class="fa fa-rotate-left"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="90" title="向右翻转">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="向右翻转">
+              <span class="fa fa-rotate-right"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="水平翻转">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="水平翻转">
+              <span class="fa fa-arrows-h"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="垂直翻转">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="垂直翻转">
+              <span class="fa fa-arrows-v"></span>
+            </span>
+                </button>
+            </div>
+
+
+            <div class="btn-group hidden">
+                <button type="button" class="btn btn-primary" data-method="disable" title="禁用">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="禁用">
+              <span class="fa fa-lock"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="enable" title="启用">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="启用">
+              <span class="fa fa-unlock"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="reset" title="重置">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="重置">
+              <span class="fa fa-refresh"></span>
+            </span>
+                </button>
+                <label class="btn btn-primary btn-upload" for="inputImage" title="上传图片">
+                    <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="重新上传图片">
+              <span class="fa fa-upload"></span>
+            </span>
+                </label>
+
+            </div>
+
+            <div class="btn-group btn-group-crop">
+                <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="下载图片">
+              下载图片
+            </span>
+                </button>
+            </div>
+
+            <!-- Show the cropped image in modal -->
+            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="getCroppedCanvasTitle">已剪裁</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">下载图片</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+        </div><!-- /.docs-buttons -->
+
+        <div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0;padding-right:0;">
+            <div class="row" style="margin:0;">
+                <div class="col-xs-6" style="padding:0 5px 0 0">
+                    <button type="button" class="btn btn-success btn-submit btn-block btn-embossed">确定</button>
+                </div>
+                <div class="col-xs-6" style="padding:0 0 0 5px">
+                    <button type="button" class="btn btn-default btn-cancel btn-block btn-embossed">取消</button>
+                </div>
+            </div>
+        </div><!-- /.docs-toggles -->
+    </div>
+</div>
+
+<script>
+    require.callback = function () {
+        define('cropper', ['jquery', 'bootstrap', 'frontend', 'template', '../addons/cropper/js/cropper'], function ($, undefined, Frontend, Template, undefined, Cropper) {
+            var Controller = {
+                cropper: function () {
+                    var URL = window.URL || window.webkitURL;
+                    var $image = $('#image');
+                    var console = window.console || {
+                        log: function () {
+                        }
+                    };
+
+                    var $download = $('#download');
+                    var $dataX = $('#dataX');
+                    var $dataY = $('#dataY');
+                    var $dataHeight = $('#dataHeight');
+                    var $dataWidth = $('#dataWidth');
+                    var $dataRotate = $('#dataRotate');
+                    var $dataScaleX = $('#dataScaleX');
+                    var $dataScaleY = $('#dataScaleY');
+                    var options = {
+                        aspectRatio: parseFloat("{$Think.get.aspectRatio|default='NaN'}"),
+                        preview: '.img-preview',
+                        autoCropArea: parseFloat("{$Think.get.autoCropArea|default='.8'}"),
+                        cropBoxMovable: !!parseInt("{$Think.get.cropBoxMovable|default='1'}"),
+                        cropBoxResizable: !!parseInt("{$Think.get.cropBoxResizable|default='1'}"),
+                        minCropBoxWidth: parseInt("{$Think.get.minCropBoxWidth|default='0'}"),
+                        minCropBoxHeight: parseInt("{$Think.get.minCropBoxHeight|default='0'}"),
+                        minContainerWidth: parseInt("{$Think.get.minContainerWidth|default='0'}"),
+                        minContainerHeight: parseInt("{$Think.get.minContainerHeight|default='0'}"),
+                        minCanvasWidth: parseInt("{$Think.get.minCanvasWidth|default='0'}"),
+                        minCanvasHeight: parseInt("{$Think.get.minCanvasHeight|default='0'}"),
+                        crop: function (e) {
+                            $dataX.val(Math.round(e.detail.x));
+                            $dataY.val(Math.round(e.detail.y));
+                            $dataHeight.val(Math.round(e.detail.height));
+                            $dataWidth.val(Math.round(e.detail.width));
+                            $dataRotate.val(e.detail.rotate);
+                            $dataScaleX.val(e.detail.scaleX);
+                            $dataScaleY.val(e.detail.scaleY);
+                        }
+                    };
+                    var croppedOptions = {
+                        minWidth: parseInt("{$Think.get.croppedMinWidth|default='0'}"),
+                        minHeight: parseInt("{$Think.get.croppedMinHeight|default='0'}"),
+                        maxWidth: parseInt("{$Think.get.croppedMaxWidth|default='2048'}"),
+                        maxHeight: parseInt("{$Think.get.croppedMaxHeight|default='2048'}"),
+                        fillColor: "{:$Think.get.croppedFillColor ? '#' . $Think.get.croppedFillColor : 'transparent'}",
+                    };
+                    if (parseInt("{$Think.get.croppedMinWidth|default='0'}") > 0) {
+                        croppedOptions.width = parseInt("{$Think.get.croppedWidth}");
+                    }
+                    if (parseInt("{$Think.get.croppedMinHeight|default='0'}") > 0) {
+                        croppedOptions.height = parseInt("{$Think.get.croppedHeight}");
+                    }
+                    var originalImageURL = $image.attr('src');
+                    var uploadedImageName = 'cropped.jpg';
+                    var uploadedImageType = 'image/jpeg';
+                    var uploadedImageURL;
+
+                    // 实例化
+                    $image.cropper(options);
+
+                    //确认事件
+                    $(document).on("click", ".btn-submit", function () {
+                        var data = $image.cropper('getData');
+                        var dataURI = $image.cropper('getCroppedCanvas', croppedOptions).toDataURL('image/png');
+                        data.dataURI = dataURI;
+                        Fast.api.close(data);
+                    });
+
+                    //取消事件
+                    $(document).on("click", ".btn-cancel", function () {
+                        Fast.api.close();
+                    });
+
+                    // Buttons
+                    if (!$.isFunction(document.createElement('canvas').getContext)) {
+                        $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+                    }
+
+                    if (typeof document.createElement('cropper').style.transition === 'undefined') {
+                        $('button[data-method="rotate"]').prop('disabled', true);
+                        $('button[data-method="scale"]').prop('disabled', true);
+                    }
+
+                    // $dataWidth,$dataHeight点击事件
+                    $('#dataWidth,#dataHeight').change(function () {
+                        options.aspectRatio = $dataWidth.val() / $dataHeight.val()
+                        $image.cropper('destroy').cropper(options);
+                    });
+
+                    // Download
+                    if (typeof $download[0].download === 'undefined') {
+                        $download.addClass('disabled');
+                    }
+
+                    // Options
+                    $('.docs-toggles').on('change', 'input', function () {
+                        var $this = $(this);
+                        var name = $this.attr('name');
+                        var type = $this.prop('type');
+                        var cropBoxData;
+                        var canvasData;
+
+                        if (!$image.data('cropper')) {
+                            return;
+                        }
+
+                        if (type === 'checkbox') {
+                            options[name] = $this.prop('checked');
+                            cropBoxData = $image.cropper('getCropBoxData');
+                            canvasData = $image.cropper('getCanvasData');
+
+                            options.ready = function () {
+                                $image.cropper('setCropBoxData', cropBoxData);
+                                $image.cropper('setCanvasData', canvasData);
+                            };
+                        } else if (type === 'radio') {
+                            options[name] = $this.val();
+                            console.log(options);
+                        }
+
+                        $image.cropper('destroy').cropper(options);
+                    });
+
+                    // Methods
+                    $('.docs-buttons').on('click', '[data-method]', function () {
+                        var $this = $(this);
+                        var data = $this.data();
+                        var cropper = $image.data('cropper');
+                        var cropped;
+                        var $target;
+                        var result;
+
+                        if ($this.prop('disabled') || $this.hasClass('disabled')) {
+                            return;
+                        }
+
+                        if (cropper && data.method) {
+                            data = $.extend({}, data); // Clone a new one
+
+                            if (typeof data.target !== 'undefined') {
+                                $target = $(data.target);
+
+                                if (typeof data.option === 'undefined') {
+                                    try {
+                                        data.option = JSON.parse($target.val());
+                                    } catch (e) {
+                                        console.log(e.message);
+                                    }
+                                }
+                            }
+
+                            cropped = cropper.cropped;
+                            switch (data.method) {
+                                case 'rotate':
+                                    if (cropped && options.viewMode > 0) {
+                                        $image.cropper('clear');
+                                    }
+                                    break;
+
+                                case 'getCroppedCanvas':
+                                    if (uploadedImageType === 'image/jpeg') {
+                                        if (!data.option) {
+                                            data.option = {};
+                                        }
+                                        $.extend(data.option, croppedOptions);
+                                        data.option.fillColor = '#fff';
+                                    }
+                                    break;
+                            }
+                            result = $image.cropper(data.method, data.option);
+                            switch (data.method) {
+                                case 'rotate':
+                                    if (cropped && options.viewMode > 0) {
+                                        $image.cropper('crop');
+                                    }
+                                    break;
+                                case 'scaleX':
+                                case 'scaleY':
+                                    $(this).data('option', -data.option);
+                                    break;
+
+                                case 'getCroppedCanvas':
+                                    if (result) {
+                                        // Bootstrap's Modal
+                                        $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+                                        if (!$download.hasClass('disabled')) {
+                                            download.download = uploadedImageName;
+                                            $download.attr('href', result.toDataURL(uploadedImageType));
+                                        }
+                                    }
+                                    break;
+
+                                case 'destroy':
+                                    if (uploadedImageURL) {
+                                        URL.revokeObjectURL(uploadedImageURL);
+                                        uploadedImageURL = '';
+                                        $image.attr('src', originalImageURL);
+                                    }
+
+                                    break;
+                            }
+
+                            if ($.isPlainObject(result) && $target) {
+                                try {
+                                    $target.val(JSON.stringify(result));
+                                } catch (e) {
+                                    console.log(e.message);
+                                }
+                            }
+                        }
+                    });
+
+                    // 键盘支持
+                    $(document.body).on('keydown', function (e) {
+                        if (e.target !== this || !$image.data('cropper') || this.scrollTop > 300) {
+                            return;
+                        }
+
+                        switch (e.which) {
+                            case 37:
+                                e.preventDefault();
+                                $image.cropper('move', -1, 0);
+                                break;
+                            case 38:
+                                e.preventDefault();
+                                $image.cropper('move', 0, -1);
+                                break;
+                            case 39:
+                                e.preventDefault();
+                                $image.cropper('move', 1, 0);
+                                break;
+                            case 40:
+                                e.preventDefault();
+                                $image.cropper('move', 0, 1);
+                                break;
+                        }
+                    });
+
+                    // 上传图片
+                    var $inputImage = $('#inputImage');
+
+                    if (URL) {
+                        $inputImage.change(function () {
+                            var files = this.files;
+                            var file;
+
+                            if (!$image.data('cropper')) {
+                                return;
+                            }
+
+                            if (files && files.length) {
+                                file = files[0];
+
+                                if (/^image\/\w+$/.test(file.type)) {
+                                    uploadedImageName = file.name;
+                                    uploadedImageType = file.type;
+
+                                    if (uploadedImageURL) {
+                                        URL.revokeObjectURL(uploadedImageURL);
+                                    }
+
+                                    uploadedImageURL = URL.createObjectURL(file);
+                                    $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                                    $inputImage.val('');
+                                } else {
+                                    window.alert('请选择一张图片');
+                                }
+                            }
+                        });
+                    } else {
+                        $inputImage.prop('disabled', true).parent().addClass('disabled');
+                    }
+                }
+            };
+            return Controller;
+        });
+    };
+</script>
+
+<script src="__CDN__/assets/js/require{$Think.config.app_debug?'':'.min'}.js" data-main="__CDN__/assets/js/require-frontend{$Think.config.app_debug?'':'.min'}.js?v={$site.version}"></script>
+
+</body>
+</html>
