@@ -11,11 +11,13 @@
 
 > api模块服务 模型 控制器 验证器分层
 
+> 优化halt()调试方法
+
 ## **安装使用**
 
->git clone https://github.com/lzqqdy/base_api.git
+>git clone https://github.com/lzqqdy/fast_api.git
 
->cd base_api
+>cd fast_api
 
 >composer install
 
