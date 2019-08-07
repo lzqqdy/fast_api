@@ -8,7 +8,7 @@
 
 namespace app\api\controller;
 
-use app\api\library\BaseException;
+use app\api\library\exception\BaseException;
 
 /**
  * Miss路由
