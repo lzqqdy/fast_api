@@ -6,10 +6,10 @@
  * Time: 18:51
  */
 
-namespace app\api\Service;
+namespace app\api\service;
 
 use app\common\library\WxPay;
-use app\api\library\BaseException;
+use app\api\library\exception\BaseException;
 
 class Payment
 {

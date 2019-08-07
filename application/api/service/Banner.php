@@ -6,10 +6,10 @@
  * Time: 10:35
  */
 
-namespace app\api\Service;
+namespace app\api\service;
 
 use app\api\model\Banner as BannerModel;
-use app\api\library\BaseException;
+use app\api\library\exception\BaseException;
 
 /**
  * Class Banner

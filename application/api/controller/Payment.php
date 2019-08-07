@@ -10,7 +10,7 @@ namespace app\api\controller;
 
 
 use app\common\controller\Api;
-use app\api\Service\Payment as PaymentService;
+use app\api\service\Payment as PaymentService;
 
 /**
  * 统一支付接口
@@ -24,7 +24,6 @@ class Payment extends Api
 
     /**
      * 支付
-     * @throws \app\api\library\BaseException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
