@@ -27,7 +27,14 @@ Route::group('api', function () {
     Route::any('test', "api/Index/test");
     Route::any('error', "api/Index/errorException");
     Route::any('notice', "api/Index/noticeException");
-
+    /**
+     * 注册
+     */
+    Route::post('register', "api/User/register");
+    /**
+     * 登录
+     */
+    Route::post('login', "api/User/login");
     /**
      * 首页接口
      */

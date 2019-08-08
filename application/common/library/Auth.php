@@ -11,6 +11,8 @@ use think\Exception;
 use think\Hook;
 use think\Request;
 use think\Validate;
+use app\api\library\exception\NoticeException;
+use lzqqdy\tools\WeChat;
 
 class Auth
 {
@@ -26,7 +28,7 @@ class Auth
     //默认配置
     protected $config = [];
     protected $options = [];
-    protected $allowFields = ['id', 'username', 'nickname', 'mobile', 'avatar', 'score'];
+    protected $allowFields = ['username', 'avatar'];
 
     public function __construct($options = [])
     {
@@ -114,13 +116,152 @@ class Auth
     }
 
     /**
+     * 微信小程序注册
+     * @param $data
+     * @param $code
+     * @return bool
+     * @throws NoticeException
+     */
+    public function wxRegister($data, $code)
+    {
+//        // 检测手机是否存在
+//        if (isset($data['mobile']) && User::getByMobile($data['mobile'])) {
+//            $this->setError('Mobile already exist');
+//            return false;
+//        }
+        $wxInfo = self::wxCodeLogin($code);
+        // 检测openid是否存在
+        if (isset($wxInfo['openid']) && User::getByOpenid($wxInfo['openid'])) {
+            throw new NoticeException(['msg' => '该用户已经注册，请直接登录！', 'code' => 50002]);
+        }
+        //头像下载
+        $avatar = self::downAvatar($data['avatar'], $wxInfo['openid']);
+
+        //数据存入
+        $ip = request()->ip();
+        $time = time();
+
+        $data = [
+            'username' => $data['username'],
+            'nickname' => $data['username'],
+//            'mobile'   => $data['mobile'],
+            'openid'   => $wxInfo['openid'],
+            'password' => '123456',
+            'avatar'   => $avatar,
+        ];
+        $params = array_merge($data, [
+            'salt'      => Random::alnum(),
+            'jointime'  => $time,
+            'joinip'    => $ip,
+            'logintime' => $time,
+            'loginip'   => $ip,
+            'prevtime'  => $time,
+            'status'    => 'normal',
+        ]);
+        $params['password'] = $this->getEncryptPassword($data['password'], $params['salt']);
+
+        //账号注册时需要开启事务,避免出现垃圾数据
+        Db::startTrans();
+        try {
+            $user = User::create($params, true);
+
+            $this->_user = User::get($user->id);
+
+            //设置Token
+            $this->_token = Random::uuid();
+            Token::set($this->_token, $user->id, $this->keeptime);
+
+            //注册成功的事件
+            Hook::listen("user_register_successed", $this->_user, $data);
+            Db::commit();
+        } catch (Exception $e) {
+            $this->setError($e->getMessage());
+            Db::rollback();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 微信小程序登录
+     * @param $code
+     * @return bool
+     * @throws NoticeException
+     * @throws \think\exception\DbException
+     */
+    public function wxLogin($code)
+    {
+        $wxInfo = self::wxCodeLogin($code);
+        $user = User::get(['openid' => $wxInfo['openid']]);
+        if (!$user) {
+            throw new NoticeException(['msg' => '未注册！请先注册', 'code' => 50001]);
+        }
+        if ($user->status != 'normal') {
+            $this->setError('Account is locked');
+            return false;
+        }
+        //直接登录会员
+        $this->direct($user->id);
+
+        return true;
+    }
+
+    /**
+     * 使用code获取微信用户信息
+     * @param $code
+     * @return bool|mixed
+     * @throws NoticeException
+     */
+    public static function wxCodeLogin($code)
+    {
+        //获取配置
+        $config = [
+            'appid'     => config('site.app_id'),
+            'appsecret' => config('site.app_secret'),
+        ];
+        $WeChat = new WeChat($config);
+        $data = $WeChat->wxLogin($code);  //登录
+        if ($data === false) {
+            $error = $WeChat->getError();
+            throw new NoticeException(['msg' => $error['errMsg'], 'code' => 0]);
+        }
+        return $data;
+    }
+
+    /**
+     * 头像下载到本地
+     * @param $url
+     * @param $name
+     * @return string
+     */
+    public static function downAvatar($url, $name)
+    {
+        // 没有头像
+        if (!$url) {
+            return '';
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        $file = curl_exec($ch);
+        curl_close($ch);
+        $savePath = 'avatar/' . $name . '.jpg';
+        $resource = fopen($savePath, 'a');
+        fwrite($resource, $file);
+        fclose($resource);
+
+        return '/' . $savePath;
+    }
+
+    /**
      * 注册用户
      *
      * @param string $username 用户名
      * @param string $password 密码
-     * @param string $email    邮箱
-     * @param string $mobile   手机号
-     * @param array  $extend   扩展参数
+     * @param string $email 邮箱
+     * @param string $mobile 手机号
+     * @param array $extend 扩展参数
      * @return boolean
      */
     public function register($username, $password, $email = '', $mobile = '', $extend = [])
@@ -159,7 +300,7 @@ class Auth
             'logintime' => $time,
             'loginip'   => $ip,
             'prevtime'  => $time,
-            'status'    => 'normal'
+            'status'    => 'normal',
         ]);
         $params['password'] = $this->getEncryptPassword($password, $params['salt']);
         $params = array_merge($params, $extend);
@@ -189,13 +330,14 @@ class Auth
     /**
      * 用户登录
      *
-     * @param string $account  账号,用户名、邮箱、手机号
+     * @param string $account 账号,用户名、邮箱、手机号
      * @param string $password 密码
      * @return boolean
      */
     public function login($account, $password)
     {
-        $field = Validate::is($account, 'email') ? 'email' : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
+        $field = Validate::is($account, 'email') ? 'email' : (Validate::regex($account,
+            '/^1\d{10}$/') ? 'mobile' : 'username');
         $user = User::get([$field => $account]);
         if (!$user) {
             $this->setError('Account is incorrect');
@@ -239,9 +381,9 @@ class Auth
 
     /**
      * 修改密码
-     * @param string $newpassword       新密码
-     * @param string $oldpassword       旧密码
-     * @param bool   $ignoreoldpassword 忽略旧密码
+     * @param string $newpassword 新密码
+     * @param string $oldpassword 旧密码
+     * @param bool $ignoreoldpassword 忽略旧密码
      * @return boolean
      */
     public function changepwd($newpassword, $oldpassword = '', $ignoreoldpassword = false)
@@ -251,7 +393,8 @@ class Auth
             return false;
         }
         //判断旧密码是否正确
-        if ($this->_user->password == $this->getEncryptPassword($oldpassword, $this->_user->salt) || $ignoreoldpassword) {
+        if ($this->_user->password == $this->getEncryptPassword($oldpassword,
+                $this->_user->salt) || $ignoreoldpassword) {
             Db::startTrans();
             try {
                 $salt = Random::alnum();
@@ -290,7 +433,8 @@ class Auth
 
                 //判断连续登录和最大连续登录
                 if ($user->logintime < \fast\Date::unixtime('day')) {
-                    $user->successions = $user->logintime < \fast\Date::unixtime('day', -1) ? 1 : $user->successions + 1;
+                    $user->successions = $user->logintime < \fast\Date::unixtime('day',
+                        -1) ? 1 : $user->successions + 1;
                     $user->maxsuccessions = max($user->successions, $user->maxsuccessions);
                 }
 
@@ -324,7 +468,7 @@ class Auth
 
     /**
      * 检测是否是否有对应权限
-     * @param string $path   控制器/方法
+     * @param string $path 控制器/方法
      * @param string $module 模块 默认为当前模块
      * @return boolean
      */
@@ -391,7 +535,8 @@ class Auth
             return [];
         }
         $rules = explode(',', $group->rules);
-        $this->rules = UserRule::where('status', 'normal')->where('id', 'in', $rules)->field('id,pid,name,title,ismenu')->select();
+        $this->rules = UserRule::where('status', 'normal')->where('id', 'in',
+            $rules)->field('id,pid,name,title,ismenu')->select();
         return $this->rules;
     }
 
@@ -462,7 +607,7 @@ class Auth
     /**
      * 获取密码加密后的字符串
      * @param string $password 密码
-     * @param string $salt     密码盐
+     * @param string $salt 密码盐
      * @return string
      */
     public function getEncryptPassword($password, $salt = '')
@@ -504,15 +649,16 @@ class Auth
 
     /**
      * 渲染用户数据
-     * @param array  $datalist  二维数组
-     * @param mixed  $fields    加载的字段列表
-     * @param string $fieldkey  渲染的字段
+     * @param array $datalist 二维数组
+     * @param mixed $fields 加载的字段列表
+     * @param string $fieldkey 渲染的字段
      * @param string $renderkey 结果字段
      * @return array
      */
     public function render(&$datalist, $fields = [], $fieldkey = 'user_id', $renderkey = 'userinfo')
     {
-        $fields = !$fields ? ['id', 'nickname', 'level', 'avatar'] : (is_array($fields) ? $fields : explode(',', $fields));
+        $fields = !$fields ? ['id', 'nickname', 'level', 'avatar'] : (is_array($fields) ? $fields : explode(',',
+            $fields));
         $ids = [];
         foreach ($datalist as $k => $v) {
             if (!isset($v[$fieldkey])) {

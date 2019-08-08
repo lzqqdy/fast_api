@@ -19,8 +19,6 @@ class User extends Validate
         'username|用户名称' => 'require',
         'code|code'     => 'require',
         'avatar|头像'     => 'require',
-        'mobile|电话'     => 'require',
-        'captcha|验证码'   => 'require',
     ];
     /**
      * 提示消息
@@ -32,6 +30,6 @@ class User extends Validate
      */
     protected $scene = [
         'login'    => ['code'],
-        'register' => ['username', 'code', 'avatar', 'mobile', 'captcha'],
+        'register' => ['username', 'code', 'avatar'],
     ];
 }

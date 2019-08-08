@@ -22,6 +22,49 @@ class User extends Api
     }
 
     /**
+     * 小程序注册接口
+     * @throws \app\api\library\exception\NoticeException
+     */
+    public function register()
+    {
+        $data = $this->request->only(['code', 'username', 'avatar']);
+        $validate = new \app\api\validate\User();
+        if (!$validate->scene('register')->check($data)) {
+            $this->error($validate->getError());
+        }
+        $ret = $this->auth->wxRegister($data, $data['code']);
+        if ($ret) {
+            $data = ['userinfo' => $this->auth->getUserinfo()];
+            $this->success(__('Logged in successful'), $data);
+        } else {
+            $this->error($this->auth->getError());
+        }
+    }
+
+    /**
+     * 小程序登录
+     * @throws \app\api\library\exception\NoticeException
+     * @throws \think\exception\DbException
+     */
+    public function login()
+    {
+        $data = $this->request->only(['code']);
+        $validate = new \app\api\validate\User();
+        if (!$validate->scene('login')->check($data)) {
+            $this->error($validate->getError());
+        }
+        $ret = $this->auth->wxLogin($data['code']);
+        if ($ret) {
+            $data = ['userinfo' => $this->auth->getUserinfo()];
+            $this->success(__('Logged in successful'), $data);
+        } else {
+            $this->error($this->auth->getError());
+        }
+    }
+
+    //---------------------------分割线-------------------------------//
+
+    /**
      * 会员中心
      */
     public function index()
@@ -32,10 +75,10 @@ class User extends Api
     /**
      * 会员登录
      *
-     * @param string $account  账号
+     * @param string $account 账号
      * @param string $password 密码
      */
-    public function login()
+    public function login_bak()
     {
         $account = $this->request->request('account');
         $password = $this->request->request('password');
@@ -54,7 +97,7 @@ class User extends Api
     /**
      * 手机验证码登录
      *
-     * @param string $mobile  手机号
+     * @param string $mobile 手机号
      * @param string $captcha 验证码
      */
     public function mobilelogin()
@@ -94,10 +137,10 @@ class User extends Api
      *
      * @param string $username 用户名
      * @param string $password 密码
-     * @param string $email    邮箱
-     * @param string $mobile   手机号
+     * @param string $email 邮箱
+     * @param string $mobile 手机号
      */
-    public function register()
+    public function register_bak()
     {
         $username = $this->request->request('username');
         $password = $this->request->request('password');
@@ -133,10 +176,10 @@ class User extends Api
     /**
      * 修改会员个人信息
      *
-     * @param string $avatar   头像地址
+     * @param string $avatar 头像地址
      * @param string $username 用户名
      * @param string $nickname 昵称
-     * @param string $bio      个人简介
+     * @param string $bio 个人简介
      */
     public function profile()
     {
@@ -162,7 +205,7 @@ class User extends Api
     /**
      * 修改邮箱
      *
-     * @param string $email   邮箱
+     * @param string $email 邮箱
      * @param string $captcha 验证码
      */
     public function changeemail()
@@ -196,7 +239,7 @@ class User extends Api
     /**
      * 修改手机号
      *
-     * @param string $email   手机号
+     * @param string $email 手机号
      * @param string $captcha 验证码
      */
     public function changemobile()
@@ -231,7 +274,7 @@ class User extends Api
      * 第三方登录
      *
      * @param string $platform 平台名称
-     * @param string $code     Code码
+     * @param string $code Code码
      */
     public function third()
     {
@@ -250,7 +293,7 @@ class User extends Api
             if ($loginret) {
                 $data = [
                     'userinfo'  => $this->auth->getUserinfo(),
-                    'thirdinfo' => $result
+                    'thirdinfo' => $result,
                 ];
                 $this->success(__('Logged in successful'), $data);
             }
@@ -261,9 +304,9 @@ class User extends Api
     /**
      * 重置密码
      *
-     * @param string $mobile      手机号
+     * @param string $mobile 手机号
      * @param string $newpassword 新密码
-     * @param string $captcha     验证码
+     * @param string $captcha 验证码
      */
     public function resetpwd()
     {

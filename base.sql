@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 06/08/2019 11:00:54
+ Date: 08/08/2019 08:37:19
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `fa_admin`  (
 -- ----------------------------
 -- Records of fa_admin
 -- ----------------------------
-INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1565060118, 1492186163, 1565060118, '393aa183-7c75-4ca5-a83b-2c4c36657460', 'normal');
+INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1565224546, 1492186163, 1565224546, '235eb071-82f2-487a-92ee-edb53bed7f8a', 'normal');
 
 -- ----------------------------
 -- Table structure for fa_admin_log
@@ -60,7 +60,14 @@ CREATE TABLE `fa_admin_log`  (
   `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of fa_admin_log
+-- ----------------------------
+INSERT INTO `fa_admin_log` VALUES (1, 0, 'Unknown', '/', '登录', '{\"__token__\":\"ec46cad10c1bbbc2d3d5a375af616f42\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"7f06894fd1e57c44426ea80b58ef88b8ce\",\"geetest_validate\":\"f1bdc6d0d2b0fcf36f7d947b18843331\",\"geetest_seccode\":\"f1bdc6d0d2b0fcf36f7d947b18843331|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565140757);
+INSERT INTO `fa_admin_log` VALUES (2, 1, 'admin', '/', '登录', '{\"__token__\":\"2d5b3d4d6d5def999049838e4a6169ca\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"391e7d47477f8932be5a1128b81a1361a2\",\"geetest_validate\":\"253bbfac1a5a3d23e3227acd6786d4e9\",\"geetest_seccode\":\"253bbfac1a5a3d23e3227acd6786d4e9|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565140769);
+INSERT INTO `fa_admin_log` VALUES (3, 1, 'admin', '/?url=%2Fadmin%2Fgeneral%2Fattachment%3Fref%3Daddtabs', '登录', '{\"url\":\"\\/admin\\/general\\/attachment?ref=addtabs\",\"__token__\":\"d803334425247060d35fcd30c4f462b9\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"25d19bfff89664e494ba39c88d7024c1hp\",\"geetest_validate\":\"0461ce61cdd687ab18ccfcb35685c074\",\"geetest_seccode\":\"0461ce61cdd687ab18ccfcb35685c074|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565224546);
 
 -- ----------------------------
 -- Table structure for fa_attachment
@@ -359,8 +366,8 @@ INSERT INTO `fa_config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user',
 INSERT INTO `fa_config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
 INSERT INTO `fa_config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
 INSERT INTO `fa_config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
-INSERT INTO `fa_config` VALUES (18, 'app_id', 'WeChat', '小程序appid', '填写小程序appid', 'string', '1', '', '', '');
-INSERT INTO `fa_config` VALUES (19, 'app_secret', 'WeChat', '小程序AppSecret', '填写小程序AppSecret', 'string', '1', '', '', '');
+INSERT INTO `fa_config` VALUES (18, 'app_id', 'WeChat', '小程序appid', '填写小程序appid', 'string', 'wx446bb47f5c456b42', '', '', '');
+INSERT INTO `fa_config` VALUES (19, 'app_secret', 'WeChat', '小程序AppSecret', '填写小程序AppSecret', 'string', 'eb4c76c7a2a9ee8e0d11a93cdd708e52', '', '', '');
 INSERT INTO `fa_config` VALUES (20, 'app_mch_id', 'Payment', '商户账号', '填写商户账号', 'string', '1', '', '', '');
 INSERT INTO `fa_config` VALUES (21, 'app_key', 'Payment', '商户密钥', '填写商户密钥', 'string', '1', '', '', '');
 
@@ -474,9 +481,10 @@ DROP TABLE IF EXISTS `fa_user`;
 CREATE TABLE `fa_user`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `group_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组别ID',
+  `openid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '微信唯一ID',
   `username` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
-  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
+  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码(默认123456)',
   `salt` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码盐',
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '电子邮箱',
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '手机号',
@@ -504,12 +512,12 @@ CREATE TABLE `fa_user`  (
   INDEX `username`(`username`) USING BTREE,
   INDEX `email`(`email`) USING BTREE,
   INDEX `mobile`(`mobile`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_user
 -- ----------------------------
-INSERT INTO `fa_user` VALUES (1, 1, 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1516171614, '', 'normal', '');
+INSERT INTO `fa_user` VALUES (1, 1, '', 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1516171614, '', 'normal', '');
 
 -- ----------------------------
 -- Table structure for fa_user_group
