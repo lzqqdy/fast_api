@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'baidueditor'], function ($, undefined, Backend, Table, Form, UE) {
+define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'baidueditor','editable'], function ($, undefined, Backend, Table, Form, UE) {
 
     var Controller = {
         index: function () {
@@ -24,14 +24,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'baidueditor'], funct
                 columns: [
                     [
                         {checkbox: true},
-                        {
-                            field: '', title: '序号', operate: false, formatter: function (value, row, index) {
-                                var options = table.bootstrapTable('getOptions');
-                                var pageNumber = options.pageNumber;
-                                var pageSize = options.pageSize;
-                                return (pageNumber - 1) * pageSize + 1 + index;
-                            }
-                        },
+                        {field: 'id', title: __('ID'), sortable: true},
                         {field: 'admin_id', title: __('Admin_id')},
                         {field: 'category_id', title: __('Category_id')},
                         {field: 'category_ids', title: __('Category_ids')},
@@ -73,7 +66,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'baidueditor'], funct
                             operate: 'FIND_IN_SET',
                             formatter: Table.api.formatter.label
                         },
-                        {field: 'title', title: __('Title')},
+                        {field: 'title', title: __('Title'),editable: true},
                         {
                             field: 'image',
                             title: __('Image'),
