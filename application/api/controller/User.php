@@ -2,7 +2,6 @@
 
 namespace app\api\controller;
 
-use app\common\controller\Api;
 use app\common\library\Ems;
 use app\common\library\Sms;
 use fast\Random;
@@ -11,7 +10,7 @@ use think\Validate;
 /**
  * 会员接口
  */
-class User extends Api
+class User extends Base
 {
     protected $noNeedLogin = ['login', 'mobilelogin', 'register', 'resetpwd', 'changeemail', 'changemobile', 'third'];
     protected $noNeedRight = '*';
