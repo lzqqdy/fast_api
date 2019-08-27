@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 08/08/2019 08:37:19
+ Date: 27/08/2019 11:37:42
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `fa_admin`  (
 -- ----------------------------
 -- Records of fa_admin
 -- ----------------------------
-INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1565224546, 1492186163, 1565224546, '235eb071-82f2-487a-92ee-edb53bed7f8a', 'normal');
+INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '091755f72905026fd64c00ce4ae95cf2', '97abff', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'admin@admin.com', 0, 1566876974, 1492186163, 1566876974, '54f62058-35c3-4289-a91f-1cb9c22e4e57', 'normal');
 
 -- ----------------------------
 -- Table structure for fa_admin_log
@@ -60,14 +60,13 @@ CREATE TABLE `fa_admin_log`  (
   `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_admin_log
 -- ----------------------------
-INSERT INTO `fa_admin_log` VALUES (1, 0, 'Unknown', '/', '登录', '{\"__token__\":\"ec46cad10c1bbbc2d3d5a375af616f42\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"7f06894fd1e57c44426ea80b58ef88b8ce\",\"geetest_validate\":\"f1bdc6d0d2b0fcf36f7d947b18843331\",\"geetest_seccode\":\"f1bdc6d0d2b0fcf36f7d947b18843331|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565140757);
-INSERT INTO `fa_admin_log` VALUES (2, 1, 'admin', '/', '登录', '{\"__token__\":\"2d5b3d4d6d5def999049838e4a6169ca\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"391e7d47477f8932be5a1128b81a1361a2\",\"geetest_validate\":\"253bbfac1a5a3d23e3227acd6786d4e9\",\"geetest_seccode\":\"253bbfac1a5a3d23e3227acd6786d4e9|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565140769);
-INSERT INTO `fa_admin_log` VALUES (3, 1, 'admin', '/?url=%2Fadmin%2Fgeneral%2Fattachment%3Fref%3Daddtabs', '登录', '{\"url\":\"\\/admin\\/general\\/attachment?ref=addtabs\",\"__token__\":\"d803334425247060d35fcd30c4f462b9\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"25d19bfff89664e494ba39c88d7024c1hp\",\"geetest_validate\":\"0461ce61cdd687ab18ccfcb35685c074\",\"geetest_seccode\":\"0461ce61cdd687ab18ccfcb35685c074|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 1565224546);
+INSERT INTO `fa_admin_log` VALUES (1, 1, 'admin', '/', '登录', '{\"__token__\":\"19c2a3d11d9491f2aebded56781cf688\",\"username\":\"admin\",\"captcha\":\"ok\",\"geetest_challenge\":\"42c9b36061a0e2e017eaf229cde2e348b9\",\"geetest_validate\":\"e746d89389f6ac00bf951243862bdf9b\",\"geetest_seccode\":\"e746d89389f6ac00bf951243862bdf9b|jordan\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36', 1566876974);
+INSERT INTO `fa_admin_log` VALUES (2, 1, 'admin', '/admin/user/user/del/ids/1', '会员管理 会员管理 删除', '{\"action\":\"del\",\"ids\":\"1\",\"params\":\"\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36', 1566876998);
 
 -- ----------------------------
 -- Table structure for fa_attachment
@@ -162,7 +161,7 @@ CREATE TABLE `fa_auth_rule`  (
   UNIQUE INDEX `name`(`name`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE,
   INDEX `weigh`(`weigh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_auth_rule
@@ -268,6 +267,15 @@ INSERT INTO `fa_auth_rule` VALUES (100, 'file', 2, 'general/logs', '日志管理
 INSERT INTO `fa_auth_rule` VALUES (101, 'file', 100, 'general/logs/index', '查看', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (102, 'file', 100, 'general/logs/del', '删除', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
 INSERT INTO `fa_auth_rule` VALUES (103, 'file', 100, 'general/logs/detail', '详情', 'fa fa-circle-o', '', '', 0, 1563372853, 1563372853, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (104, 'file', 0, 'test', '测试管理', 'fa fa-circle-o\r', '', '', 1, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (105, 'file', 104, 'test/index', '查看', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (106, 'file', 104, 'test/recyclebin', '回收站', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (107, 'file', 104, 'test/add', '添加', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (108, 'file', 104, 'test/edit', '编辑', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (109, 'file', 104, 'test/del', '删除', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (110, 'file', 104, 'test/destroy', '真实删除', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (111, 'file', 104, 'test/restore', '还原', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
+INSERT INTO `fa_auth_rule` VALUES (112, 'file', 104, 'test/multi', '批量更新', 'fa fa-circle-o', '', '', 0, 1565840335, 1565840335, 0, 'normal');
 
 -- ----------------------------
 -- Table structure for fa_category
@@ -325,7 +333,13 @@ CREATE TABLE `fa_command`  (
   `updatetime` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
   `status` enum('successed','failured') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'failured' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '在线命令表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '在线命令表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of fa_command
+-- ----------------------------
+INSERT INTO `fa_command` VALUES (1, 'crud', '[\"--table=fa_test\"]', 'php think crud --table=fa_test', 'controller already exists!\nIf you need to rebuild again, use the parameter --force=true', 1565840324, 1565840324, 1565840325, 'failured');
+INSERT INTO `fa_command` VALUES (2, 'menu', '[\"--controller=Test\"]', 'php think menu --controller=Test', 'Build Successed!', 1565840335, 1565840335, 1565840335, 'successed');
 
 -- ----------------------------
 -- Table structure for fa_config
@@ -505,6 +519,7 @@ CREATE TABLE `fa_user`  (
   `jointime` int(10) NULL DEFAULT NULL COMMENT '加入时间',
   `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
   `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
+  `deletetime` int(10) NULL DEFAULT NULL COMMENT '删除时间',
   `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'Token',
   `status` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '状态',
   `verification` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '验证',
@@ -512,12 +527,12 @@ CREATE TABLE `fa_user`  (
   INDEX `username`(`username`) USING BTREE,
   INDEX `email`(`email`) USING BTREE,
   INDEX `mobile`(`mobile`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of fa_user
 -- ----------------------------
-INSERT INTO `fa_user` VALUES (1, 1, '', 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1516171614, '', 'normal', '');
+INSERT INTO `fa_user` VALUES (1, 1, '', 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1566876998, NULL, '', 'normal', '');
 
 -- ----------------------------
 -- Table structure for fa_user_group
