@@ -11,6 +11,14 @@ use think\Addons;
 class Log extends Addons
 {
 
+    // 初始化更改日志级别配置项
+    public function appInit(&$params)
+    {
+        $logConfig = get_addon_config('log');
+        $level = explode($logConfig['level'], ',');
+        config('log.level', $level);
+    }
+
     /**
      * 插件安装方法
      * @return bool
@@ -30,7 +38,7 @@ class Log extends Addons
                 ],
             ]
         ];
-        Menu::create($menu, 2);
+        Menu::create($menu, 'general');
         return true;
     }
 

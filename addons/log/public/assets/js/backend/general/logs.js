@@ -158,6 +158,21 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'upload', 'jstree'], 
             diyForm: function (file_paths) {
                 var params = '?file_paths=' + file_paths;
                 var url = Controller.action.index + params;
+                if (file_paths.indexOf('_cli.log') > -1) {
+                    Fast.api.ajax(url, function (data) {
+                        var content = '<div style="white-space: pre-wrap;background: #333;color: #fff; padding: 10px;padding-top: 3px;min-height: 600px;">' + data + '</div>';
+                        layer.open({
+                            type: 1,
+                            title: 'cli日志信息',
+                            fixed: true, //不固定
+                            maxmin: true,
+                            area: ['800px', '600px'],
+                            content: content,
+                            shade: 0
+                        });
+                    });
+                    return true;
+                }
                 if (this.startTable) {
                     table.bootstrapTable('refresh', {url: url});
                 } else {

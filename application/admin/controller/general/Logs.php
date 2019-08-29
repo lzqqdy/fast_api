@@ -30,6 +30,14 @@ class Logs extends Backend
         $directory = $this->log->getDirectory();
         if ($this->request->isAjax()) {
             $filePaths = isset($_GET['file_paths']) ? $_GET['file_paths'] : [];
+            if (mb_strpos($filePaths, '_cli.log') !== false) {
+                $path = $this->log->complementLogPath($filePaths);
+                if (false === $path) {
+                    $this->error(404);
+                }
+                $content = file_get_contents($path);
+                $this->success('', '', $content);
+            }
             $whereFilter = request()->param('filter');
             $whereFilter = $whereFilter ? json_decode($whereFilter, true) : [];
             $rows = $this->log->getLogs($filePaths, $whereFilter);
