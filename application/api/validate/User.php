@@ -8,9 +8,8 @@
 
 namespace app\api\validate;
 
-use think\Validate;
 
-class User extends Validate
+class User extends Base
 {
     /**
      * 验证规则

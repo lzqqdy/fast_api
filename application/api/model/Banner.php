@@ -12,7 +12,7 @@ namespace app\api\model;
  * Class Banner
  * @package app\api\model
  */
-class Banner extends BaseModel
+class Banner extends Base
 {
     // 表名
     protected $name = 'banner';

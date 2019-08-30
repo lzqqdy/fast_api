@@ -15,7 +15,7 @@ use think\Model;
  * Class BaseModel
  * @package app\api\model
  */
-class BaseModel extends Model
+class Base extends Model
 {
     //时间格式化格式
     const TIME_TYPE = "Y-m-d H:i";
