@@ -2,6 +2,7 @@
 /.vscode
 /runtime
 /vendor
+/thinkphp
 *.log
 .env
 composer.lock
