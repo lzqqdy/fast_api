@@ -44,7 +44,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'htmlspecialchars,addslashes,strip_tags',
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
@@ -240,7 +240,7 @@ return [
         // 验证码位数
         'length'   => 4,
         // 验证成功后是否重置
-        'reset'    => true
+        'reset'    => true,
     ],
     // +----------------------------------------------------------------------
     // | Token设置
