@@ -39,14 +39,14 @@
         </p>
     {/if}
     <p class="clearfix">
-        <a href="__PUBLIC__" class="btn btn-grey">{:__('Go back')}</a>
+        <!--<a href="__PUBLIC__" class="btn btn-grey">{:__('Go back')}</a>-->
         {if $url}
             <a href="{$url}" class="btn btn-primary">{:__('Jump now')}</a>
         {/if}
     </p>
 </div>
 <div class="copyright">
-    <p>Powered by <a href="https://www.fastadmin.net/?ref=jump">FastAdmin</a></p>
+    <p>Powered by <a href="https://github.com/lzqqdy/" target="_blank">lzqqdy</a></p>
 </div>
 {if $url}
     <script type="text/javascript">
