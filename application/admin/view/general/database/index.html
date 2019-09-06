@@ -100,7 +100,8 @@
         <%for (var i=0;i<backuplist.length;i++){%>
         <tr>
             <td><%=i+1%></td>
-            <td><%=backuplist[i].file%></td>
+            <!--<td><%=backuplist[i].file%></td>-->
+            <td><a href="{:url('download?file=')}<%=backuplist[i].file%>"> <%=backuplist[i].file%> </a></td>
             <td><%=backuplist[i].size%></td>
             <td><%=backuplist[i].date%></td>
             <td>

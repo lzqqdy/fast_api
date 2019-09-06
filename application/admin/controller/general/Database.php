@@ -9,6 +9,7 @@ use think\Debug;
 use think\Exception;
 use think\exception\PDOException;
 use ZipArchive;
+use app\common\library\Download;
 
 /**
  * 数据库管理
@@ -82,7 +83,7 @@ class Database extends Backend
                 [
                     'file' => str_replace($backupDir, '', $filename),
                     'date' => date("Y-m-d H:i:s", $time),
-                    'size' => format_bytes(filesize($filename))
+                    'size' => format_bytes(filesize($filename)),
                 ];
         }
         krsort($backuplist);
@@ -162,7 +163,8 @@ class Database extends Backend
         if ($this->request->isPost()) {
             $database = config('database');
             try {
-                $backup = new Backup($database['hostname'], $database['username'], $database['database'], $database['password'], $database['hostport']);
+                $backup = new Backup($database['hostname'], $database['username'], $database['database'],
+                    $database['password'], $database['hostport']);
                 $backup->setIgnoreTable($config['backupIgnoreTables'])->backup($backupDir);
             } catch (Exception $e) {
                 $this->error($e->getMessage());
@@ -264,7 +266,8 @@ class Database extends Backend
                 if ($count <= 0) {
                     $r .= __('Query returned an empty result');
                 } else {
-                    $r .= (__('Total:%s', $count) . (!$limit && $count > $maxreturn ? ',' . __('Max output:%s', $maxreturn) : ""));
+                    $r .= (__('Total:%s', $count) . (!$limit && $count > $maxreturn ? ',' . __('Max output:%s',
+                                $maxreturn) : ""));
                 }
                 $r = $r . ',' . $usedseconds;
                 $j = 0;
@@ -288,5 +291,21 @@ class Database extends Backend
             }
         }
         echo $r;
+    }
+
+    /**
+     * 下载备份文件
+     * @internal
+     */
+    public function download()
+    {
+        $config = get_addon_config('database');
+        $file = $this->request->get('file');
+        $backupDir = ROOT_PATH . 'public' . DS . $config['backupDir'];
+        $file2 = $backupDir . $file;
+
+        $download = new Download($file2);
+        $download->mimeType('zip');
+        return $download->name($file);
     }
 }
