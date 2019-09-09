@@ -9,6 +9,7 @@
 namespace app\api\model;
 
 use think\Model;
+use traits\model\SoftDelete;
 
 /**
  * 基类模型
@@ -17,6 +18,8 @@ use think\Model;
  */
 class Base extends Model
 {
+    use SoftDelete;
+
     //时间格式化格式
     const TIME_TYPE = "Y-m-d H:i";
 
