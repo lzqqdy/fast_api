@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\User;
 use app\common\controller\Backend;
 use think\Config;
 
@@ -21,20 +22,21 @@ class Dashboard extends Backend
     {
         $seventtime = \fast\Date::unixtime('day', -7);
         $paylist = $createlist = [];
-        for ($i = 0; $i < 7; $i++)
-        {
+        for ($i = 0; $i < 7; $i++) {
             $day = date("Y-m-d", $seventtime + ($i * 86400));
             $createlist[$day] = mt_rand(20, 200);
             $paylist[$day] = mt_rand(1, mt_rand(1, $createlist[$day]));
         }
         $hooks = config('addons.hooks');
-        $uploadmode = isset($hooks['upload_config_init']) && $hooks['upload_config_init'] ? implode(',', $hooks['upload_config_init']) : 'local';
+        $uploadmode = isset($hooks['upload_config_init']) && $hooks['upload_config_init'] ? implode(',',
+            $hooks['upload_config_init']) : 'local';
         $addonComposerCfg = ROOT_PATH . '/vendor/karsonzhang/fastadmin-addons/composer.json';
         Config::parse($addonComposerCfg, "json", "composer");
         $config = Config::get("composer");
         $addonVersion = isset($config['version']) ? $config['version'] : __('Unknown');
+        $totaluser = (new User())->count();
         $this->view->assign([
-            'totaluser'        => 35200,
+            'totaluser'        => $totaluser,
             'totalviews'       => 219390,
             'totalorder'       => 32143,
             'totalorderamount' => 174800,
@@ -46,8 +48,8 @@ class Dashboard extends Backend
             'sevendau'         => '32%',
             'paylist'          => $paylist,
             'createlist'       => $createlist,
-            'addonversion'       => $addonVersion,
-            'uploadmode'       => $uploadmode
+            'addonversion'     => $addonVersion,
+            'uploadmode'       => $uploadmode,
         ]);
 
         return $this->view->fetch();
