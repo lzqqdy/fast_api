@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 03/09/2019 17:27:48
+ Date: 17/09/2019 14:42:29
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `db_admin`  (
 -- ----------------------------
 -- Records of db_admin
 -- ----------------------------
-INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin', 'fefa28052d9998ec5d8b37533608c84a', 'f10955', '/assets/img/avatar.png', 'admin@admin.com', 0, 1502029281, 1492186163, 1502029281, 'd3992c3b-5ecc-4ecb-9dc2-8997780fcadc', 'normal');
+INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin😀', 'fefa28052d9998ec5d8b37533608c84a', 'f10955', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'lzqqdy@qq.com', 0, 1568687847, 1492186163, 1568687847, 'f649e85b-e6fb-4610-ad59-f3a8eb0cf720', 'normal');
 
 -- ----------------------------
 -- Table structure for db_admin_log
@@ -60,16 +60,7 @@ CREATE TABLE `db_admin_log`  (
   `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of db_admin_log
--- ----------------------------
-INSERT INTO `db_admin_log` VALUES (1, 1, 'admin', '/index.php/admin/user/user/edit/ids/1?dialog=1', 'User User Edit', '{\"dialog\":\"1\",\"row\":{\"group_id\":\"1\",\"username\":\"admin\",\"nickname\":\"\\u8427\\u5c0f\\u54a9\\ud83d\\ude0d\\ud83d\\ude02\",\"password\":\"\",\"email\":\"admin@163.com\",\"mobile\":\"13888888888\",\"avatar\":\"\",\"level\":\"0\",\"gender\":\"0\",\"birthday\":\"2017-04-15\",\"bio\":\"\",\"money\":\"0.00\",\"score\":\"0\",\"successions\":\"1\",\"maxsuccessions\":\"1\",\"prevtime\":\"2018-01-17 14:28:12\",\"logintime\":\"2018-01-17 14:46:54\",\"loginip\":\"127.0.0.1\",\"loginfailure\":\"0\",\"joinip\":\"127.0.0.1\",\"jointime\":\"2017-04-06 14:50:18\",\"status\":\"normal\"},\"ids\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36', 1567502514);
-INSERT INTO `db_admin_log` VALUES (2, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"command\",\"force\":\"0\",\"uid\":\"0\",\"token\":\"\",\"version\":\"1.0.5\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36', 1567502541);
-INSERT INTO `db_admin_log` VALUES (3, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36', 1567502541);
-INSERT INTO `db_admin_log` VALUES (4, 1, 'admin', '/index.php/admin/addon/install', '插件管理 安装', '{\"name\":\"crontab\",\"force\":\"0\",\"uid\":\"0\",\"token\":\"\",\"version\":\"1.0.2\",\"faversion\":\"1.0.0.20190705_beta\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36', 1567502547);
-INSERT INTO `db_admin_log` VALUES (5, 1, 'admin', '/index.php/admin/index/index', '', '{\"action\":\"refreshmenu\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36', 1567502547);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for db_attachment
@@ -93,12 +84,13 @@ CREATE TABLE `db_attachment`  (
   `storage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'local' COMMENT '存储位置',
   `sha1` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of db_attachment
 -- ----------------------------
 INSERT INTO `db_attachment` VALUES (1, 1, 0, '/assets/img/qrcode.png', '150', '150', 'png', 0, 21859, 'image/png', '', 1499681848, 1499681848, 1499681848, 'local', '17163603d0263e4838b9387ff2cd4877e8b018f6');
+INSERT INTO `db_attachment` VALUES (2, 1, 0, '/uploads/20190903/0c16f62f9be52a153a93f4c9a682ea51.jpg', '640', '639', 'jpg', 0, 40189, 'image/jpeg', '{\"name\":\"lzqqdy.jpg\"}', 1567503469, 1567503469, 1567503469, 'local', 'ddcab515db4474ca48fcb04bbc68c6471501e0ed');
 
 -- ----------------------------
 -- Table structure for db_auth_group
@@ -163,7 +155,7 @@ CREATE TABLE `db_auth_rule`  (
   UNIQUE INDEX `name`(`name`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE,
   INDEX `weigh`(`weigh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 116 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '节点表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of db_auth_rule
@@ -265,6 +257,24 @@ INSERT INTO `db_auth_rule` VALUES (94, 'file', 92, 'general/crontab/add', '添�
 INSERT INTO `db_auth_rule` VALUES (95, 'file', 92, 'general/crontab/edit', '编辑 ', 'fa fa-circle-o', '', '', 0, 1567502547, 1567502547, 0, 'normal');
 INSERT INTO `db_auth_rule` VALUES (96, 'file', 92, 'general/crontab/del', '删除', 'fa fa-circle-o', '', '', 0, 1567502547, 1567502547, 0, 'normal');
 INSERT INTO `db_auth_rule` VALUES (97, 'file', 92, 'general/crontab/multi', '批量更新', 'fa fa-circle-o', '', '', 0, 1567502547, 1567502547, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (98, 'file', 0, 'test', '测试管理', 'fa fa-circle-o\r', '', '', 1, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (99, 'file', 98, 'test/index', '查看', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (100, 'file', 98, 'test/recyclebin', '回收站', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (101, 'file', 98, 'test/add', '添加', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (102, 'file', 98, 'test/edit', '编辑', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (103, 'file', 98, 'test/del', '删除', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (104, 'file', 98, 'test/destroy', '真实删除', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (105, 'file', 98, 'test/restore', '还原', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (106, 'file', 98, 'test/multi', '批量更新', 'fa fa-circle-o', '', '', 0, 1567503524, 1567503524, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (107, 'file', 2, 'general/database', '数据库管理', 'fa fa-database', '', '可在线进行一些简单的数据库表优化或修复,查看表结构和数据。也可以进行SQL语句的操作', 1, 1567563264, 1567563264, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (108, 'file', 107, 'general/database/index', '查看', 'fa fa-circle-o', '', '', 0, 1567563264, 1567563264, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (109, 'file', 107, 'general/database/query', '查询', 'fa fa-circle-o', '', '', 0, 1567563264, 1567563264, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (110, 'file', 107, 'general/database/backup', '备份', 'fa fa-circle-o', '', '', 0, 1567563264, 1567563264, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (111, 'file', 107, 'general/database/restore', '恢复', 'fa fa-circle-o', '', '', 0, 1567563264, 1567563264, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (112, 'file', 2, 'general/logs', '日志管理', 'fa fa-pied-piper-alt', '', '', 1, 1568259150, 1568259150, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (113, 'file', 112, 'general/logs/index', '查看', 'fa fa-circle-o', '', '', 0, 1568259150, 1568259150, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (114, 'file', 112, 'general/logs/del', '删除', 'fa fa-circle-o', '', '', 0, 1568259150, 1568259150, 0, 'normal');
+INSERT INTO `db_auth_rule` VALUES (115, 'file', 112, 'general/logs/detail', '详情', 'fa fa-circle-o', '', '', 0, 1568259150, 1568259150, 0, 'normal');
 
 -- ----------------------------
 -- Table structure for db_category
@@ -322,7 +332,12 @@ CREATE TABLE `db_command`  (
   `updatetime` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
   `status` enum('successed','failured') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'failured' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '在线命令表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '在线命令表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of db_command
+-- ----------------------------
+INSERT INTO `db_command` VALUES (2, 'menu', '[\"--controller=Test\"]', 'php think menu --controller=Test', 'Build Successed!', 1567503524, 1567503524, 1567503524, 'successed');
 
 -- ----------------------------
 -- Table structure for db_config
@@ -341,13 +356,13 @@ CREATE TABLE `db_config`  (
   `extend` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '扩展属性',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of db_config
 -- ----------------------------
 INSERT INTO `db_config` VALUES (1, 'name', 'basic', 'Site name', '请填写站点名称', 'string', 'FastAdmin', '', 'required', '');
-INSERT INTO `db_config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15000000号-1', 'string', '', '', '', '');
+INSERT INTO `db_config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15054802号-4', 'string', '', '', '', '');
 INSERT INTO `db_config` VALUES (3, 'cdnurl', 'basic', 'Cdn url', '如果静态资源使用第三方云储存请配置该值', 'string', '', '', '', '');
 INSERT INTO `db_config` VALUES (4, 'version', 'basic', 'Version', '如果静态资源有变动请重新配置该值', 'string', '1.0.1', '', 'required', '');
 INSERT INTO `db_config` VALUES (5, 'timezone', 'basic', 'Timezone', '', 'string', 'Asia/Shanghai', '', 'required', '');
@@ -500,7 +515,7 @@ CREATE TABLE `db_user`  (
   `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
   `deletetime` int(10) NULL DEFAULT NULL COMMENT '删除时间',
   `token` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Token',
-  `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '状态',
+  `status` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1' COMMENT '状态:0=禁用,1=启用',
   `verification` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '验证',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `username`(`username`) USING BTREE,
@@ -511,7 +526,7 @@ CREATE TABLE `db_user`  (
 -- ----------------------------
 -- Records of db_user
 -- ----------------------------
-INSERT INTO `db_user` VALUES (1, 1, '', 'admin', '萧小咩😍😂', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1567502514, NULL, '', 'normal', '');
+INSERT INTO `db_user` VALUES (1, 1, '', 'admin', '萧小咩😍', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '/uploads/20190903/0c16f62f9be52a153a93f4c9a682ea51.jpg', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1568702508, NULL, '', '1', '');
 
 -- ----------------------------
 -- Table structure for db_user_group
@@ -545,7 +560,13 @@ CREATE TABLE `db_user_money_log`  (
   `memo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注',
   `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '会员余额变动表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '会员余额变动表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of db_user_money_log
+-- ----------------------------
+INSERT INTO `db_user_money_log` VALUES (1, 1, 20.00, 0.00, 20.00, '管理员变更金额', 1567504972);
+INSERT INTO `db_user_money_log` VALUES (2, 1, -20.00, 20.00, 0.00, '管理员变更金额', 1567504994);
 
 -- ----------------------------
 -- Table structure for db_user_rule

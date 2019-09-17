@@ -62,7 +62,7 @@ class User extends Model
 
     public function getStatusList()
     {
-        return ['normal' => __('Normal'), 'hidden' => __('Hidden')];
+        return ['0' => __('Status 0'), '1' => __('Status 1')];
     }
 
     public function getPrevtimeTextAttr($value, $data)

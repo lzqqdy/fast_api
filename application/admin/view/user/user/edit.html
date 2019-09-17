@@ -137,7 +137,7 @@
     <div class="form-group">
         <label for="content" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')], $row['status'])}
+            {:build_radios('row[status]', ['0'=>__('Status 0'), '1'=>__('Status 1')], $row['status'])}
         </div>
     </div>
     <div class="form-group layer-footer">
