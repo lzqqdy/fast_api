@@ -6,16 +6,16 @@
  * Time: 10:35
  */
 
-namespace app\api\service;
+namespace app\api\logic;
 
 use app\api\model\Banner as BannerModel;
 use app\api\library\exception\BaseException;
 
 /**
  * Class Banner
- * @package app\api\Service
+ * @package app\api\logic
  */
-class Banner
+class Banner extends Base
 {
     /**
      * 获取列表
