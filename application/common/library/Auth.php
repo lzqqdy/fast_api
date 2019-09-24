@@ -11,7 +11,6 @@ use think\Exception;
 use think\Hook;
 use think\Request;
 use think\Validate;
-use app\api\library\exception\NoticeException;
 use lzqqdy\tools\WeChat;
 
 class Auth
@@ -120,7 +119,6 @@ class Auth
      * @param $data
      * @param $code
      * @return bool
-     * @throws NoticeException
      */
     public function wxRegister($data, $code)
     {
@@ -132,7 +130,7 @@ class Auth
         $wxInfo = self::wxCodeLogin($code);
         // 检测openid是否存在
         if (isset($wxInfo['openid']) && User::getByOpenid($wxInfo['openid'])) {
-            throw new NoticeException(['msg' => '该用户已经注册，请直接登录！', 'code' => 50002]);
+            throw_response_exception(['msg' => '该用户已经注册，请直接登录！', 'code' => 50002]);
         }
         //头像下载
         $avatar = self::downAvatar($data['avatar'], $wxInfo['openid']);
@@ -186,7 +184,6 @@ class Auth
      * 微信小程序登录
      * @param $code
      * @return bool
-     * @throws NoticeException
      * @throws \think\exception\DbException
      */
     public function wxLogin($code)
@@ -194,7 +191,8 @@ class Auth
         $wxInfo = self::wxCodeLogin($code);
         $user = User::get(['openid' => $wxInfo['openid']]);
         if (!$user) {
-            throw new NoticeException(['msg' => '未注册！请先注册', 'code' => 50001]);
+            $this->setError('未注册！请先注册');
+            return false;
         }
         if ($user->status != 'normal') {
             $this->setError('Account is locked');
@@ -210,7 +208,6 @@ class Auth
      * 使用code获取微信用户信息
      * @param $code
      * @return bool|mixed
-     * @throws NoticeException
      */
     public static function wxCodeLogin($code)
     {
@@ -223,7 +220,7 @@ class Auth
         $data = $WeChat->wxLogin($code);  //登录
         if ($data === false) {
             $error = $WeChat->getError();
-            throw new NoticeException(['msg' => $error['errMsg'], 'code' => 0]);
+            throw_response_exception(['msg' => $error['errMsg'], 'code' => 0]);
         }
         return $data;
     }

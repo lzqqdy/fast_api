@@ -2,9 +2,6 @@
 
 namespace app\api\controller;
 
-use app\api\library\exception\NoticeException;
-use app\api\library\exception\ErrorException;
-
 /**
  * 首页接口
  */
@@ -24,40 +21,26 @@ class Index extends Base
      */
     public function test()
     {
-        $this->success('请求成功');
-    }
-
-    /**
-     * 提示级别异常抛出demo
-     * @throws NoticeException
-     */
-    public function noticeException()
-    {
-        //todo
-        //模拟提醒级别的错误，以接口方式返回给前端
-        $status = 1;
-        $data = ['user_id' => 1, 'c_id' => 2];
-        if ($status == 1) {
-            //data为写入日志中的数据，不展示
-            throw new NoticeException(['msg' => 'status状态错误！', 'data' => $data]);
+        $param = $this->param; //接收请求过来的参数
+        //验证$param
+        $validate = new \app\api\validate\User();
+        if (!$validate->scene('login')->check($param)) {
+            $this->error($validate->getError());
         }
+        $data = $this->logicBanner->getList($param); //使用"逻辑前缀+类名"直接调用逻辑层（logic）里的方法
+        $this->success('请求成功', $data); //操作成功返回数据
     }
 
     /**
-     * 错误基本异常抛出demo
-     * @throws ErrorException
+     * 模拟异常上报
      */
     public function errorException()
     {
-        try {
-            //todo
-            //发生代码级别的error
-            echo $a;
-        } catch (\Exception $e) {
-            throw new ErrorException(['msg' => $e->getMessage()]);
-        }
+        //todo
+        //发生代码级别的error
+        $a = $b + 1;
+        echo $a;
     }
-
 
     /**
      * 首页

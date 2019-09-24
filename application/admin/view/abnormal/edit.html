@@ -1,0 +1,21 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Ab_class')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-ab_class" data-rule="required" class="form-control" name="row[ab_class]" type="text" value="{$row.ab_class|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Ab_date')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-ab_date" data-rule="required" class="form-control" name="row[ab_date]" type="text" value="{$row.ab_date|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Ab_data')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-ab_data" data-rule="required" class="form-control " rows="100" name="row[ab_data]" cols="50">{$row.ab_data|htmlentities}</textarea>
+        </div>
+    </div>
+</form>

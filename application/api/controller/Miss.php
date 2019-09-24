@@ -8,7 +8,6 @@
 
 namespace app\api\controller;
 
-use app\api\library\exception\BaseException;
 
 /**
  * Miss路由
@@ -17,14 +16,11 @@ use app\api\library\exception\BaseException;
  */
 class Miss
 {
-
     /**
      * miss
-     * @throws BaseException
      */
     public function miss()
     {
-        throw new BaseException(['msg' => '404!Not Found', 'code' => 404]);
+        throw_response_exception(['msg' => '404!Not Found', 'code' => 404]);
     }
-
 }

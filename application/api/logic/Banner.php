@@ -8,9 +8,6 @@
 
 namespace app\api\logic;
 
-use app\api\model\Banner as BannerModel;
-use app\api\library\exception\BaseException;
-
 /**
  * Class Banner
  * @package app\api\logic
@@ -23,9 +20,15 @@ class Banner extends Base
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getList()
+    public function getList($param)
     {
-        //todo
-        return [];
+        //TODO
+        $data = [];
+        if ($param) {
+            $this->apiError('状态错误!', $data, 0); //在逻辑层使用该方法，中止代码以json格式将数据返回
+        }
+        $ret = $this->modelUser->select(); //不同名模型
+        $ret = $this->model->select(); //同名banner模型
+        return $ret ?? [];
     }
 }

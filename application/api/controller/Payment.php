@@ -10,7 +10,6 @@ namespace app\api\controller;
 
 
 use app\common\controller\Api;
-use app\api\service\Payment as PaymentService;
 
 /**
  * 统一支付接口
