@@ -17,6 +17,12 @@ if (!function_exists('throw_response_exception')) {
     }
 }
 if (!function_exists('str_prefix')) {
+    /**
+     * strpos
+     * @param $str
+     * @param $prefix
+     * @return bool
+     */
     function str_prefix($str, $prefix)
     {
         return strpos($str, $prefix) === 0 ? true : false;

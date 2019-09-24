@@ -22,7 +22,6 @@ class User extends Base
 
     /**
      * 小程序注册接口
-     * @throws \app\api\library\exception\NoticeException
      */
     public function register()
     {
@@ -42,7 +41,6 @@ class User extends Base
 
     /**
      * 小程序登录
-     * @throws \app\api\library\exception\NoticeException
      * @throws \think\exception\DbException
      */
     public function login()
