@@ -26,7 +26,6 @@ Route::group('api', function () {
      */
     Route::any('test', "api/Index/test");
     Route::any('error', "api/Index/errorException");
-    Route::any('notice', "api/Index/noticeException");
     /**
      * 注册
      */
