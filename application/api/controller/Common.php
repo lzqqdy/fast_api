@@ -135,10 +135,10 @@ class Common extends Api
             $attachment->data(array_filter($params));
             $attachment->save();
             \think\Hook::listen("upload_after", $attachment);
-            $this->success([
-                'id'  => $attachment->id,
-                'url' => request()->domain() . $uploadDir . $splInfo->getSaveName(),
-            ], '上传成功');
+            $this->success('上传成功', [
+                'url'  => request()->domain() . $uploadDir . $splInfo->getSaveName(),
+                'save' => $uploadDir . $splInfo->getSaveName(),
+            ]);
         } else {
             // 上传失败获取错误信息
             $this->error($file->getError());
