@@ -43,6 +43,23 @@ class Base extends Model
     }
 
     /**
+     * 图集地址获取器&&格式转换
+     * 读取数据时,图片地址自动拼接域名
+     * @param $value
+     * @return string
+     */
+    public function getImagesAttr($value)
+    {
+        $value = explode(',', $value);
+        if (!empty($value)) {
+            foreach ($value as &$v) {
+                $v = request()->domain() . $v;
+            }
+        }
+        return $value;
+    }
+
+    /**
      * 创建时间获取器
      * @param $value
      * @param $data
