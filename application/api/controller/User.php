@@ -6,6 +6,7 @@ use app\common\library\Ems;
 use app\common\library\Sms;
 use fast\Random;
 use think\Validate;
+use think\Hook;
 
 /**
  * 会员接口
@@ -18,6 +19,21 @@ class User extends Base
     public function _initialize()
     {
         parent::_initialize();
+
+        $auth = $this->auth;
+        //监听注册登录注销的事件
+        Hook::add('user_login_successed', function ($user) use ($auth) {
+            //TODO
+        });
+        Hook::add('user_register_successed', function ($user) use ($auth) {
+            //TODO
+        });
+        Hook::add('user_delete_successed', function ($user) use ($auth) {
+            //TODO
+        });
+        Hook::add('user_logout_successed', function ($user) use ($auth) {
+            //TODO
+        });
     }
 
     /**

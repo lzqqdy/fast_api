@@ -444,6 +444,9 @@ class Auth
 
                 $this->_user = $user;
 
+                //登录前清除其余token
+                Token::clear($user->id);
+
                 $this->_token = Random::uuid();
                 Token::set($this->_token, $user->id, $this->keeptime);
 
