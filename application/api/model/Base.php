@@ -26,6 +26,11 @@ class Base extends Model
     // 自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';
 
+    //数据完成
+    //status字段为所以表共用字段，用于数据展示和隐藏
+    //表相关的具体状态字段命名规则为"table_status"
+    protected $insert = ['status' => 1];
+
     // 定义时间戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
