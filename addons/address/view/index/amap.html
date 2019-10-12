@@ -86,7 +86,7 @@
 <script src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        var as, x, y, address, map, lat, lng, geocoder;
+        var as, address, map, lat, lng, geocoder;
         var init = function () {
             AMapUI.loadUI(['misc/PositionPicker', 'misc/PoiPicker'], function (PositionPicker, PoiPicker) {
                 //加载PositionPicker，loadUI的路径参数为模块名中 'ui/' 之后的部分
@@ -105,33 +105,36 @@
                     input: "place"
                 };
 
+                var relocation = function (lnglat) {
+                    lng = lnglat.lng;
+                    lat = lnglat.lat;
+                    map.panTo([lng, lat]);
+                    positionPicker.start(lnglat);
+                    geocoder.getAddress(lng + ',' + lat, function (status, result) {
+                        if (status === 'complete' && result.regeocode) {
+                            var address = result.regeocode.formattedAddress;
+                            var label = '<div class="info">地址:' + address + '<br>经度:' + lng + '<br>纬度:' + lat + '</div>';
+                            positionPicker.marker.setLabel({
+                                content: label //显示内容
+                            });
+                        } else {
+                            console.log(JSON.stringify(result));
+                        }
+                    });
+                };
                 var auto = new AMap.Autocomplete(autoOptions);
 
                 //构造地点查询类
                 var placeSearch = new AMap.PlaceSearch({
                     map: map
                 });
-
                 //注册监听，当选中某条记录时会触发
                 AMap.event.addListener(auto, "select", function (e) {
                     placeSearch.setCity(e.poi.adcode);
                     placeSearch.search(e.poi.name);  //关键字查询查询
                 });
                 AMap.event.addListener(map, 'click', function (e) {
-                    map.panTo([e.lnglat.lng, e.lnglat.lat]);
-                    positionPicker.start(e.lnglat);
-                    geocoder.getAddress(e.lnglat.lng + ',' + e.lnglat.lat, function (status, result) {
-                        if (status === 'complete' && result.regeocode) {
-                            var address = result.regeocode.formattedAddress;
-                            var label = '<div class="info">地址:' + address + '<br>经度:' + e.lnglat.lng + '<br>纬度:' + e.lnglat.lat + '</div>';
-                            positionPicker.marker.setLabel({
-                                content: label //显示内容
-                            });
-                        } else {
-                            alert(JSON.stringify(result))
-                        }
-                    });
-
+                    relocation(e.lnglat);
                 });
 
                 //加载工具条
@@ -147,23 +150,22 @@
                 });
                 poiPicker.on('poiPicked', function (poiResult) {
                     poiPicker.hideSearchResults();
-                    lat = poiResult.item.location.lat
-                    lng = poiResult.item.location.lng
-                    $('.poi .nearpoi').text(poiResult.item.name)
-                    $('.address .info').text(poiResult.item.address)
-                    $('#address').val(poiResult.item.address)
-                    map.panTo([lng, lat]);
+                    $('.poi .nearpoi').text(poiResult.item.name);
+                    $('.address .info').text(poiResult.item.address);
+                    $('#address').val(poiResult.item.address);
+                    $("#place").val(poiResult.item.name);
+
+                    relocation(poiResult.item.location);
                 });
 
                 positionPicker.on('success', function (positionResult) {
                     as = positionResult.position;
                     address = positionResult.address;
-                    x = as.lat;
-                    y = as.lng;
+                    lat = as.lat;
+                    lng = as.lng;
                 });
                 positionPicker.on('fail', function (positionResult) {
                     address = '';
-                    console.log(positionResult);
                 });
                 positionPicker.start();
             });
@@ -184,7 +186,7 @@
         //点击搜索按钮
         $(document).on('click', '.confirm', function () {
             var zoom = map.getZoom();
-            var data = {lat: x, lng: y, zoom: zoom, address: address};
+            var data = {lat: lat, lng: lng, zoom: zoom, address: address};
             close(data);
         });
         init();
