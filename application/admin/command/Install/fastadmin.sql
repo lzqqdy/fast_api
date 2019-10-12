@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 12/10/2019 14:19:36
+ Date: 12/10/2019 16:06:58
 */
 
 SET NAMES utf8mb4;
@@ -57,7 +57,7 @@ CREATE TABLE `db_admin`  (
 -- ----------------------------
 -- Records of db_admin
 -- ----------------------------
-INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin😀', 'fefa28052d9998ec5d8b37533608c84a', 'f10955', '/uploads/20190717/479b888adad78a4fde5a83fdc93de835.jpg', 'lzqqdy@qq.com', 0, 1570846143, '127.0.0.1', 1492186163, 1570846143, '43e42f89-60b0-43ba-9ab1-c06f21460c12', 'normal');
+INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin😀', 'bf6eac67de0c3bf5c05818ab421b8b22', '995f43', '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', 'lzqqdy@qq.com', 0, 1570846143, '127.0.0.1', 1492186163, 1570867438, '43e42f89-60b0-43ba-9ab1-c06f21460c12', 'normal');
 
 -- ----------------------------
 -- Table structure for db_admin_log
@@ -75,7 +75,16 @@ CREATE TABLE `db_admin_log`  (
   `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of db_admin_log
+-- ----------------------------
+INSERT INTO `db_admin_log` VALUES (1, 1, 'admin', '/admin/ajax/upload', '', '{\"name\":\"lzqqdy.jpg\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 1570867436);
+INSERT INTO `db_admin_log` VALUES (2, 1, 'admin', '/admin/general.profile/update', '常规管理 个人资料 更新个人信息', '{\"__token__\":\"b6a76f8c49be6c2a05aca579a15d4fac\",\"row\":{\"avatar\":\"\\/uploads\\/20191012\\/0c16f62f9be52a153a93f4c9a682ea51.jpg\",\"email\":\"lzqqdy@qq.com\",\"nickname\":\"Admin\\ud83d\\ude00\",\"password\":\"\"}}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 1570867438);
+INSERT INTO `db_admin_log` VALUES (3, 1, 'admin', '/admin/user/user/edit/ids/1?dialog=1', '会员管理 会员管理 编辑', '{\"dialog\":\"1\",\"row\":{\"group_id\":\"1\",\"username\":\"admin\",\"nickname\":\"\\u8427\\u5c0f\\u54a9\\ud83d\\ude0d\",\"password\":\"\",\"email\":\"admin@163.com\",\"mobile\":\"13888888888\",\"avatar\":\"\\/uploads\\/20191012\\/0c16f62f9be52a153a93f4c9a682ea51.jpg\",\"level\":\"0\",\"gender\":\"0\",\"birthday\":\"2017-04-15\",\"bio\":\"\",\"money\":\"0.00\",\"score\":\"0\",\"successions\":\"1\",\"maxsuccessions\":\"1\",\"prevtime\":\"2018-01-17 14:28:12\",\"logintime\":\"2018-01-17 14:46:54\",\"loginip\":\"127.0.0.1\",\"loginfailure\":\"0\",\"joinip\":\"127.0.0.1\",\"jointime\":\"2017-04-06 14:50:18\",\"status\":\"1\"},\"ids\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 1570867456);
+INSERT INTO `db_admin_log` VALUES (4, 1, 'admin', '/admin/category/selectpage', '', '{\"searchTable\":\"tbl\",\"searchKey\":\"id\",\"searchValue\":\"13\",\"orderBy\":[[\"name\",\"ASC\"]],\"showField\":\"name\",\"keyField\":\"id\",\"keyValue\":\"13\",\"searchField\":[\"name\"],\"custom\":{\"type\":\"test\"}}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 1570867485);
+INSERT INTO `db_admin_log` VALUES (5, 1, 'admin', '/admin/category/selectpage', '', '{\"searchTable\":\"tbl\",\"searchKey\":\"id\",\"searchValue\":\"12,13\",\"orderBy\":[[\"name\",\"ASC\"]],\"showField\":\"name\",\"keyField\":\"id\",\"keyValue\":\"12,13\",\"searchField\":[\"name\"],\"custom\":{\"type\":\"test\"}}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 1570867486);
 
 -- ----------------------------
 -- Table structure for db_attachment
@@ -99,13 +108,14 @@ CREATE TABLE `db_attachment`  (
   `storage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'local' COMMENT '存储位置',
   `sha1` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of db_attachment
 -- ----------------------------
 INSERT INTO `db_attachment` VALUES (1, 1, 0, '/assets/img/qrcode.png', '150', '150', 'png', 0, 21859, 'image/png', '', 1499681848, 1499681848, 1499681848, 'local', '17163603d0263e4838b9387ff2cd4877e8b018f6');
 INSERT INTO `db_attachment` VALUES (2, 1, 0, '/uploads/20190903/0c16f62f9be52a153a93f4c9a682ea51.jpg', '640', '639', 'jpg', 0, 40189, 'image/jpeg', '{\"name\":\"lzqqdy.jpg\"}', 1567503469, 1567503469, 1567503469, 'local', 'ddcab515db4474ca48fcb04bbc68c6471501e0ed');
+INSERT INTO `db_attachment` VALUES (3, 1, 0, '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', '640', '639', 'jpg', 0, 40189, 'image/jpeg', '{\"name\":\"lzqqdy.jpg\"}', 1570867436, 1570867436, 1570867436, 'local', 'ddcab515db4474ca48fcb04bbc68c6471501e0ed');
 
 -- ----------------------------
 -- Table structure for db_auth_group
@@ -550,7 +560,7 @@ CREATE TABLE `db_user`  (
 -- ----------------------------
 -- Records of db_user
 -- ----------------------------
-INSERT INTO `db_user` VALUES (1, 1, '', 'admin', '萧小咩😍', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '/uploads/20190903/0c16f62f9be52a153a93f4c9a682ea51.jpg', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1568703191, NULL, '', '1', '');
+INSERT INTO `db_user` VALUES (1, 1, '', 'admin', '萧小咩😍', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', 0, 0, '2017-04-15', '', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1570867456, NULL, '', '1', '');
 
 -- ----------------------------
 -- Table structure for db_user_group
