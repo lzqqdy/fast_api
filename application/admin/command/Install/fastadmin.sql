@@ -19,10 +19,11 @@ CREATE TABLE `fa_admin` (
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
   `salt` varchar(30) NOT NULL DEFAULT '' COMMENT '密码盐',
-  `avatar` varchar(100) NOT NULL DEFAULT '' COMMENT '头像',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
   `email` varchar(100) NOT NULL DEFAULT '' COMMENT '电子邮箱',
   `loginfailure` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '失败次数',
   `logintime` int(10) DEFAULT NULL COMMENT '登录时间',
+  `loginip` varchar(50) DEFAULT NULL COMMENT '登录IP',
   `createtime` int(10) DEFAULT NULL COMMENT '创建时间',
   `updatetime` int(10) DEFAULT NULL COMMENT '更新时间',
   `token` varchar(59) NOT NULL DEFAULT '' COMMENT 'Session标识',
@@ -35,7 +36,7 @@ CREATE TABLE `fa_admin` (
 -- Records of fa_admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '075eaec83636846f51c152f29b98a2fd', 's4f3', '/assets/img/avatar.png', 'admin@fastadmin.net', 0, 1502029281, 1492186163, 1502029281, 'd3992c3b-5ecc-4ecb-9dc2-8997780fcadc', 'normal');
+INSERT INTO `fa_admin` VALUES (1, 'admin', 'Admin', '075eaec83636846f51c152f29b98a2fd', 's4f3', '/assets/img/avatar.png', 'admin@fastadmin.net', 0, 1502029281, '127.0.0.1', 1492186163, 1502029281, 'd3992c3b-5ecc-4ecb-9dc2-8997780fcadc', 'normal');
 COMMIT;
 
 -- ----------------------------
