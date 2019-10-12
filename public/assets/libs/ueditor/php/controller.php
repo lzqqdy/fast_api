@@ -10,7 +10,7 @@ $CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents("
 /* custom start */
 $path = dirname($_SERVER['SCRIPT_NAME']);
 $path = empty($path) ? '/' : '/'.trim($path,'/').'/';
-$path = str_replace( '/Public/Plugin/ueditor/php/', '/Uploads/ueditor/', $path );
+$path = str_replace( '/assets/libs/ueditor/php/', '/uploads/ueditor/', $path );
 $imagePath = $path.'image/{yyyy}{mm}{dd}/{time}{rand:6}';
 $videoPath = $path.'video/{yyyy}{mm}{dd}/{time}{rand:6}';
 $filePath = $path.'file/{yyyy}{mm}{dd}/{time}{rand:6}';

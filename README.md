@@ -13,21 +13,25 @@
 
 > dd()调试方法，数据库编码更新为utf8mb4
 
-> 后台账号密码：admin admin123
+> admin加入百度编辑器，配置常用基础配置等
+
 
 ## **安装使用**
-
+1.克隆项目到你本地
 >git clone https://github.com/lzqqdy/fast_api.git
 
+2.进入目录
 >cd fast_api
 
+3.下载前端插件依赖包
+>bower install
+
+4.下载PHP依赖包
 >composer install
 
->导入base.sql
+5.添加虚拟主机并绑定到fast_api/public目录
 
->配置虚拟站点
-
->修改配置文件，访问运行
+>访问站点域名进行安装
 
 ## **在线演示**
 
