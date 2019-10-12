@@ -10,6 +10,7 @@ use think\Lang;
 use think\Loader;
 use think\Session;
 use fast\Tree;
+use think\Validate;
 
 /**
  * 后台控制器基类
@@ -144,7 +145,7 @@ class Backend extends Controller
                     $this->redirect('index/login', [], 302, ['referer' => $url]);
                     exit;
                 }
-                $this->error(__('Please login first'), url('/', ['url' => $url]));
+                $this->error(__('Please login first'), url('index/login', ['url' => $url]));
             }
             // 判断是否需要验证权限
             if (!$this->auth->match($this->noNeedRight)) {
@@ -490,7 +491,7 @@ class Backend extends Controller
                     'pid'       => isset($item['pid']) ? $item['pid'] : 0
                 ];
             }
-            if ($istree) {
+            if ($istree && !$primaryvalue) {
                 $tree = Tree::instance();
                 $tree->init(collection($list)->toArray(), 'pid');
                 $list = $tree->getTreeList($tree->getTreeArray(0), $field);
@@ -504,5 +505,21 @@ class Backend extends Controller
         }
         //这里一定要返回有list这个字段,total是可选的,如果total<=list的数量,则会隐藏分页按钮
         return json(['list' => $list, 'total' => $total]);
+    }
+
+    /**
+     * 刷新Token
+     */
+    protected function token()
+    {
+        $token = $this->request->post('__token__');
+
+        //验证Token
+        if (!Validate::is($token, "token", ['__token__' => $token])) {
+            $this->error(__('Token verification error'), '', ['__token__' => $this->request->token()]);
+        }
+
+        //刷新Token
+        $this->request->token();
     }
 }
