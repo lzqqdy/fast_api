@@ -13,6 +13,8 @@
 
 > dd()调试方法，数据库编码更新为utf8mb4
 
+> 后台账号密码：admin admin123
+
 ## **安装使用**
 
 >git clone https://github.com/lzqqdy/fast_api.git

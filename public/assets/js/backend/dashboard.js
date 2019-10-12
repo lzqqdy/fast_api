@@ -3,7 +3,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'table', 'echarts', 'echart
     var Controller = {
         index: function () {
             // 基于准备好的dom，初始化echarts实例
-            // var myChart = Echarts.init(document.getElementById('echart'), 'walden');
+            var myChart = Echarts.init(document.getElementById('echart'), 'walden');
 
             // 指定图表的配置项和数据
             var option = {
@@ -67,7 +67,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'table', 'echarts', 'echart
             };
 
             // 使用刚指定的配置项和数据显示图表。
-            // myChart.setOption(option);
+            myChart.setOption(option);
 
             //动态添加数据，可以通过Ajax获取数据然后填充
             setInterval(function () {
@@ -83,19 +83,19 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'table', 'echarts', 'echart
                     Orderdata.paydata.shift();
                     Orderdata.createdata.shift();
                 }
-                // myChart.setOption({
-                //     xAxis: {
-                //         data: Orderdata.column
-                //     },
-                //     series: [{
-                //         name: __('Sales'),
-                //         data: Orderdata.paydata
-                //     },
-                //         {
-                //             name: __('Orders'),
-                //             data: Orderdata.createdata
-                //         }]
-                // });
+                myChart.setOption({
+                    xAxis: {
+                        data: Orderdata.column
+                    },
+                    series: [{
+                        name: __('Sales'),
+                        data: Orderdata.paydata
+                    },
+                        {
+                            name: __('Orders'),
+                            data: Orderdata.createdata
+                        }]
+                });
                 if ($("#echart").width() != $("#echart canvas").width() && $("#echart canvas").width() < $("#echart").width()) {
                     myChart.resize();
                 }
