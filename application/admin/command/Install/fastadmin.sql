@@ -57,7 +57,7 @@ CREATE TABLE `db_admin`  (
 -- ----------------------------
 -- Records of db_admin
 -- ----------------------------
-INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin😀', 'bf6eac67de0c3bf5c05818ab421b8b22', '995f43', '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', 'lzqqdy@qq.com', 0, 1570846143, '127.0.0.1', 1492186163, 1570867438, '43e42f89-60b0-43ba-9ab1-c06f21460c12', 'normal');
+INSERT INTO `db_admin` VALUES (1, 'admin', 'Admin😀', 'bf6eac67de0c3bf5c05818ab421b8b22', '995f43', '/assets/img/avatar.png', 'lzqqdy@qq.com', 0, 1570846143, '127.0.0.1', 1492186163, 1570867438, '43e42f89-60b0-43ba-9ab1-c06f21460c12', 'normal');
 
 -- ----------------------------
 -- Table structure for db_admin_log
