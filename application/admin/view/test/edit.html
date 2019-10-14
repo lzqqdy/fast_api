@@ -69,7 +69,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <textarea id="c-content" data-rule="required" class="form-control editor" rows="5" name="row[content]" cols="50">{$row.content|htmlentities}</textarea>
+            <textarea id="c-content" name="row[content]" type="text/plain" style="width:100%;height:500px;">{$row.content|htmlentities}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -78,7 +78,7 @@
             <div class="input-group">
                 <input id="c-image" data-rule="required" class="form-control" size="50" name="row[image]" type="text" value="{$row.image|htmlentities}">
                 <div class="input-group-addon no-border no-padding">
-                    <span><button type="button" id="plupload-image" class="btn btn-danger plupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="plupload-image" class="btn btn-danger plupload cropper" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
                     <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
                 </div>
                 <span class="msg-box n-right" for="c-image"></span>
@@ -92,7 +92,7 @@
             <div class="input-group">
                 <input id="c-images" data-rule="required" class="form-control" size="50" name="row[images]" type="text" value="{$row.images|htmlentities}">
                 <div class="input-group-addon no-border no-padding">
-                    <span><button type="button" id="plupload-images" class="btn btn-danger plupload" data-input-id="c-images" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="true" data-preview-id="p-images"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="plupload-images" class="btn btn-danger plupload cropper" data-input-id="c-images" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="true" data-preview-id="p-images"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
                     <span><button type="button" id="fachoose-images" class="btn btn-primary fachoose" data-input-id="c-images" data-mimetype="image/*" data-multiple="true"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
                 </div>
                 <span class="msg-box n-right" for="c-images"></span>
