@@ -65,6 +65,16 @@ class Base extends Model
     }
 
     /**
+     * 富文本图片地址获取器
+     * @param $value
+     * @return string
+     */
+    public function getContentAttr($value)
+    {
+        return replacePicUrl($value, request()->domain());
+    }
+
+    /**
      * 创建时间获取器
      * @param $value
      * @param $data
