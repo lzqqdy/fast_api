@@ -105,7 +105,7 @@ CREATE TABLE `fa_attachment`  (
 -- Records of fa_attachment
 -- ----------------------------
 INSERT INTO `fa_attachment` VALUES (1, 1, 0, '/assets/img/qrcode.png', '150', '150', 'png', 0, 21859, 'image/png', '', 1499681848, 1499681848, 1499681848, 'local', '17163603d0263e4838b9387ff2cd4877e8b018f6');
-INSERT INTO `fa_attachment` VALUES (1, 1, 0, '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', '640', '639', 'jpg', 0, 40189, 'image/jpeg', '{\"name\":\"lzqqdy.jpg\"}', 1570867436, 1570867436, 1570867436, 'local', 'ddcab515db4474ca48fcb04bbc68c6471501e0ed');
+INSERT INTO `fa_attachment` VALUES (2, 1, 0, '/uploads/20191012/0c16f62f9be52a153a93f4c9a682ea51.jpg', '640', '639', 'jpg', 0, 40189, 'image/jpeg', '{\"name\":\"lzqqdy.jpg\"}', 1570867436, 1570867436, 1570867436, 'local', 'ddcab515db4474ca48fcb04bbc68c6471501e0ed');
 
 -- ----------------------------
 -- Table structure for fa_auth_group
@@ -384,27 +384,27 @@ CREATE TABLE `fa_config`  (
 -- ----------------------------
 -- Records of fa_config
 -- ----------------------------
-INSERT INTO `db_config` VALUES (1, 'name', 'basic', 'Site name', '请填写站点名称', 'string', 'FastAdmin', '', 'required', '');
-INSERT INTO `db_config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15054802号-4', 'string', '', '', '', '');
-INSERT INTO `db_config` VALUES (3, 'cdnurl', 'basic', 'Cdn url', '如果静态资源使用第三方云储存请配置该值', 'string', '', '', '', '');
-INSERT INTO `db_config` VALUES (4, 'version', 'basic', 'Version', '如果静态资源有变动请重新配置该值', 'string', '1.0.1', '', 'required', '');
-INSERT INTO `db_config` VALUES (5, 'timezone', 'basic', 'Timezone', '', 'string', 'Asia/Shanghai', '', 'required', '');
-INSERT INTO `db_config` VALUES (6, 'forbiddenip', 'basic', 'Forbidden ip', '一行一条记录', 'text', '', '', '', '');
-INSERT INTO `db_config` VALUES (7, 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
-INSERT INTO `db_config` VALUES (8, 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
-INSERT INTO `db_config` VALUES (9, 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
-INSERT INTO `db_config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"WeChat\":\"小程序\",\"PayMent\":\"微信支付\"}', '', '', '');
-INSERT INTO `db_config` VALUES (11, 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
-INSERT INTO `db_config` VALUES (12, 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
-INSERT INTO `db_config` VALUES (13, 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
-INSERT INTO `db_config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user', '（填写完整用户名）', 'string', '10000', '', '', '');
-INSERT INTO `db_config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
-INSERT INTO `db_config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
-INSERT INTO `db_config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
-INSERT INTO `db_config` VALUES (18, 'app_id', 'WeChat', '小程序AppId', '', 'string', '1', '', 'required', '');
-INSERT INTO `db_config` VALUES (19, 'app_secret', 'WeChat', '小程序AppSecret', '', 'string', '1', '', 'required', '');
-INSERT INTO `db_config` VALUES (20, 'app_mch_id', 'PayMent', '微信支付分配的商户号', '', 'string', '1', '', 'required', '');
-INSERT INTO `db_config` VALUES (21, 'app_key', 'PayMent', '微信支付KEY', '', 'string', '1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (1, 'name', 'basic', 'Site name', '请填写站点名称', 'string', 'FastAdmin', '', 'required', '');
+INSERT INTO `fa_config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15054802号-4', 'string', '', '', '', '');
+INSERT INTO `fa_config` VALUES (3, 'cdnurl', 'basic', 'Cdn url', '如果静态资源使用第三方云储存请配置该值', 'string', '', '', '', '');
+INSERT INTO `fa_config` VALUES (4, 'version', 'basic', 'Version', '如果静态资源有变动请重新配置该值', 'string', '1.0.1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (5, 'timezone', 'basic', 'Timezone', '', 'string', 'Asia/Shanghai', '', 'required', '');
+INSERT INTO `fa_config` VALUES (6, 'forbiddenip', 'basic', 'Forbidden ip', '一行一条记录', 'text', '', '', '', '');
+INSERT INTO `fa_config` VALUES (7, 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
+INSERT INTO `fa_config` VALUES (8, 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
+INSERT INTO `fa_config` VALUES (9, 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
+INSERT INTO `fa_config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"WeChat\":\"小程序\",\"PayMent\":\"微信支付\"}', '', '', '');
+INSERT INTO `fa_config` VALUES (11, 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
+INSERT INTO `fa_config` VALUES (12, 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
+INSERT INTO `fa_config` VALUES (13, 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
+INSERT INTO `fa_config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user', '（填写完整用户名）', 'string', '10000', '', '', '');
+INSERT INTO `fa_config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
+INSERT INTO `fa_config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
+INSERT INTO `fa_config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
+INSERT INTO `fa_config` VALUES (18, 'app_id', 'WeChat', '小程序AppId', '', 'string', '1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (19, 'app_secret', 'WeChat', '小程序AppSecret', '', 'string', '1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (20, 'app_mch_id', 'PayMent', '微信支付分配的商户号', '', 'string', '1', '', 'required', '');
+INSERT INTO `fa_config` VALUES (21, 'app_key', 'PayMent', '微信支付KEY', '', 'string', '1', '', 'required', '');
 
 -- ----------------------------
 -- Table structure for fa_ems
