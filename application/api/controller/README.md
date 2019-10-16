@@ -1,7 +1,8 @@
 #### Controller控制器
 * 控制器用于接收数据，进行数据验证，具体代码逻辑引用逻辑层对应方法
 * 不建议在控制器层面直接调用模型Model
-> api/controller/Index.php
+* 加入api版本控制，具体查看`route.php`文件
+> api/controller/v1/Index.php
 ```
 $param = $this->param; //接收请求过来的参数
 //验证$param

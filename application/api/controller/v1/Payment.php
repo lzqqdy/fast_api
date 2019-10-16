@@ -6,9 +6,10 @@
  * Time: 18:50
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
+use app\api\controller\Base;
 use app\api\logic\Payment as logicPayment;
 
 /**

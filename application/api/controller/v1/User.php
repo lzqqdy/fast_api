@@ -1,7 +1,8 @@
 <?php
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
+use app\api\controller\Base;
 use app\common\library\Ems;
 use app\common\library\Sms;
 use fast\Random;
@@ -10,6 +11,8 @@ use think\Hook;
 
 /**
  * 会员接口
+ * Class User
+ * @package app\api\controller\v1
  */
 class User extends Base
 {

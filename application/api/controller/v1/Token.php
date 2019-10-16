@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 use app\common\controller\Api;
 use fast\Random;

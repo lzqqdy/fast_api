@@ -1,9 +1,13 @@
 <?php
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
+
+use app\api\controller\Base;
 
 /**
  * 首页接口
+ * Class Index
+ * @package app\api\controller\v1
  */
 class Index extends Base
 {
