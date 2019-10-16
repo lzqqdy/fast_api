@@ -15,7 +15,7 @@ class Payment extends Base
      * 验证规则
      */
     protected $rule = [
-        'scene|场景值'     => 'require',
+        'scene|场景值'     => 'require|in:order',
         'order_sn|订单编号' => 'require|number|length:16',
     ];
     /**

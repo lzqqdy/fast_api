@@ -9,23 +9,20 @@
 namespace app\api\controller;
 
 
-use app\common\controller\Api;
+use app\api\logic\Payment as logicPayment;
 
 /**
  * 统一支付接口
  * Class Payment
  * @package app\api\controller
  */
-class Payment extends Api
+class Payment extends Base
 {
     protected $noNeedLogin = ['notify'];
     protected $noNeedRight = ['*'];
 
     /**
      * 支付
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function index()
     {
@@ -36,24 +33,19 @@ class Payment extends Api
         if (!$validate->check($data)) {
             $this->error($validate->getError());
         }
-        $ret = (new PaymentService($data['scene']))->pay($data['order_sn'], $user_id);
+        $ret = (new logicPayment($data['scene']))->pay($data['order_sn'], $user_id);
         $this->success('SUCCESS', $ret);
     }
 
     /**
-     * 回调
-     * @throws \app\api\library\BaseException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
+     * 回调方法
      */
     public function notify()
     {
         //模拟
         $scene = $this->request->post('scene', '');
         $order_sn = $this->request->post('order_sn', '');
-        (new PaymentService($scene))->notify($order_sn);
+        (new logicPayment($scene))->notify($order_sn);
         halt($order_sn);
         // 获取xml
         $xml = file_get_contents('php://input', 'r');
@@ -65,7 +57,7 @@ class Payment extends Api
             $order_sn = substr($out_trade_no, 0, -6);
             //获取action
             $action = $attr['attach'];
-            (new PaymentService($action))->notify($order_sn);
+            (new logicPayment($action))->notify($order_sn);
             // 返回状态给微信服务器
             echo "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
         }

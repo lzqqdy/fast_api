@@ -24,31 +24,24 @@ class WxPay
     protected $total_fee;
     protected $notify_url;
     protected $spbill_create_ip;
+    protected $attach;
 
-    function __construct(
-        $appid,
-        $openid,
-        $mch_id,
-        $key,
-        $out_trade_no,
-        $body,
-        $total_fee,
-        $notify_url,
-        $spbill_create_ip
-    ) {
-        $this->appid = $appid;
-        $this->openid = $openid;
-        $this->mch_id = $mch_id;
-        $this->key = $key;
-        $this->out_trade_no = $out_trade_no;
-        $this->body = $body;
-        $this->total_fee = $total_fee;
-        $this->notify_url = $notify_url;
-        $this->spbill_create_ip = $spbill_create_ip;
+    function __construct($config)
+    {
+        $this->appid = $config['app_id'];
+        $this->openid = $config['openid'];
+        $this->mch_id = $config['app_mch_id'];
+        $this->key = $config['app_key'];
+        $this->out_trade_no = $config['out_trade_no'];
+        $this->body = $config['body'];
+        $this->total_fee = $config['total_fee'];
+        $this->notify_url = $config['notify_url'];
+        $this->spbill_create_ip = $config['spbill_create_ip'];
+        $this->attach = isset($config['attach']) ?: ''; //额外参数
     }
 
 
-    public function pay()
+    public function paying()
     {
         //统一下单接口
         $return = $this->weixinapp();
@@ -108,11 +101,9 @@ class WxPay
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 
-
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
         curl_setopt($ch, CURLOPT_TIMEOUT, 40);
         set_time_limit(0);
-
 
         //运行curl
         $data = curl_exec($ch);
@@ -149,7 +140,6 @@ class WxPay
     {
 
         //禁止引用外部xml实体
-
         libxml_disable_entity_loader(true);
 
         $xmlstring = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
