@@ -20,20 +20,20 @@
 
 ## **安装使用**
 1.克隆项目到你本地
->git clone https://github.com/lzqqdy/fast_api.git
+>`git clone https://github.com/lzqqdy/fast_api.git`
 
 2.进入目录
->cd fast_api
+>`cd fast_api`
 
 3.下载前端插件依赖包
->bower install
+>`bower install` (先安装node环境，再安装bower`npm install -g bower`)
 
 4.下载PHP依赖包
->composer install
+>`composer install`
 
-5.添加虚拟主机并绑定到fast_api/public目录
+5.添加虚拟主机并绑定到`fast_api/public`目录
 
->访问站点域名进行安装
+>`访问站点域名进行安装`
 
 ## **在线演示**
 
