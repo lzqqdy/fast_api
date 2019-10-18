@@ -194,7 +194,8 @@ class Backend extends Controller
 
         // 配置信息
         $config = [
-            'site'           => array_intersect_key($site, array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
+            'site'           => array_intersect_key($site,
+                array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
             'upload'         => $upload,
             'modulename'     => $modulename,
             'controllername' => $controllername,
@@ -203,7 +204,7 @@ class Backend extends Controller
             'moduleurl'      => rtrim(url("/{$modulename}", '', false), '/'),
             'language'       => $lang,
             'fastadmin'      => Config::get('fastadmin'),
-            'referer'        => Session::get("referer")
+            'referer'        => Session::get("referer"),
         ];
         $config = array_merge($config, Config::get("view_replace_str"));
 
@@ -211,6 +212,15 @@ class Backend extends Controller
 
         // 配置信息后
         Hook::listen("config_init", $config);
+
+        //禁止IP实现
+        if (isset($site['forbiddenip']) && !empty($site['forbiddenip'])) {
+            $forbiddenip = explode("\n", str_replace('\r', '', $site['forbiddenip']));
+            if (in_array($this->request->ip(), $forbiddenip)) {
+                $this->error(__('You have no permission'), '');
+            }
+        }
+
         //加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置
@@ -229,22 +239,24 @@ class Backend extends Controller
      */
     protected function loadlang($name)
     {
-        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
+        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.',
+                '/', $name) . '.php');
     }
 
     /**
      * 渲染配置信息
-     * @param mixed $name  键名或数组
+     * @param mixed $name 键名或数组
      * @param mixed $value 值
      */
     protected function assignconfig($name, $value = '')
     {
-        $this->view->config = array_merge($this->view->config ? $this->view->config : [], is_array($name) ? $name : [$name => $value]);
+        $this->view->config = array_merge($this->view->config ? $this->view->config : [],
+            is_array($name) ? $name : [$name => $value]);
     }
 
     /**
      * 生成查询所需要的条件,排序方式
-     * @param mixed   $searchfields   快速查询的字段
+     * @param mixed $searchfields 快速查询的字段
      * @param boolean $relationSearch 是否关联查询
      * @return array
      */
@@ -255,7 +267,8 @@ class Backend extends Controller
         $search = $this->request->get("search", '');
         $filter = $this->request->get("filter", '');
         $op = $this->request->get("op", '', 'trim');
-        $sort = $this->request->get("sort", !empty($this->model) && $this->model->getPk() ? $this->model->getPk() : 'id');
+        $sort = $this->request->get("sort",
+            !empty($this->model) && $this->model->getPk() ? $this->model->getPk() : 'id');
         $order = $this->request->get("order", "DESC");
         $offset = $this->request->get("offset", 0);
         $limit = $this->request->get("limit", 0);
@@ -315,7 +328,8 @@ class Backend extends Controller
                 case 'FINDIN':
                 case 'FINDINSET':
                 case 'FIND_IN_SET':
-                    $where[] = "FIND_IN_SET('{$v}', " . ($relationSearch ? $k : '`' . str_replace('.', '`.`', $k) . '`') . ")";
+                    $where[] = "FIND_IN_SET('{$v}', " . ($relationSearch ? $k : '`' . str_replace('.', '`.`',
+                                $k) . '`') . ")";
                     break;
                 case 'IN':
                 case 'IN(...)':
@@ -488,7 +502,7 @@ class Backend extends Controller
                 $list[] = [
                     $primarykey => isset($item[$primarykey]) ? $item[$primarykey] : '',
                     $field      => isset($item[$field]) ? $item[$field] : '',
-                    'pid'       => isset($item['pid']) ? $item['pid'] : 0
+                    'pid'       => isset($item['pid']) ? $item['pid'] : 0,
                 ];
             }
             if ($istree && !$primaryvalue) {
