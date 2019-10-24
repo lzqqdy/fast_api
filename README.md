@@ -9,29 +9,31 @@
 
 > api模块控制器 模型 验证器 逻辑层 服务分层
 
+> 通过header头和路由文件进行api版本控制
+
 > 定义常用常量，实现控制器对逻辑层的依赖注入，逻辑层以json格式抛出信息
 
-> dd()调试方法，数据库编码更新为utf8mb4
+> 引入dd()调试方法，数据库编码更新为utf8mb4，简化数据库
 
-> admin加入百度编辑器，配置常用基础配置等
+> 后台加入免费的百度编辑器，配置常用基础配置等
 
 
 ## **安装使用**
 1.克隆项目到你本地
->git clone https://github.com/lzqqdy/fast_api.git
+>`git clone https://github.com/lzqqdy/fast_api.git`
 
 2.进入目录
->cd fast_api
+>`cd fast_api`
 
 3.下载前端插件依赖包
->bower install
+>`bower install` (先安装node环境，再安装bower`npm install -g bower`)
 
 4.下载PHP依赖包
->composer install
+>`composer install`
 
-5.添加虚拟主机并绑定到fast_api/public目录
+5.添加虚拟主机并绑定到`fast_api/public`目录
 
->访问站点域名进行安装
+>`访问站点域名进行安装`
 
 ## **在线演示**
 

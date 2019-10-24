@@ -6,7 +6,7 @@
  * Time: 9:46
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
 /**
