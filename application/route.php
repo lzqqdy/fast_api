@@ -28,7 +28,7 @@ Route::group('api', function () use ($version) {
     /**
      * 测试接口
      */
-    Route::get('test', $version . '.Index/test');
+    Route::any('test', $version . '.Index/test');
     /**
      * 异常上报
      */
