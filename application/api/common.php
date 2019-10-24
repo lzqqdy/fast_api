@@ -75,8 +75,9 @@ if (!function_exists('replacePicUrl')) {
                 //让数组按照key来排序
                 ksort($patterns);
                 ksort($replacements);
+                //去重
                 //替换内容
-                $vote_content = preg_replace($patterns, $replacements, $content);
+                $vote_content = preg_replace(array_unique($patterns), array_unique($replacements), $content);
                 return $vote_content;
             } else {
                 return $content;
