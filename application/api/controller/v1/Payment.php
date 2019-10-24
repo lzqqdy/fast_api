@@ -47,7 +47,7 @@ class Payment extends Base
         $scene = $this->request->post('scene', '');
         $order_sn = $this->request->post('order_sn', '');
         (new logicPayment($scene))->notify($order_sn);
-        halt($order_sn);
+        dd($order_sn);
         // 获取xml
         $xml = file_get_contents('php://input', 'r');
         // 转成php数组
@@ -56,9 +56,9 @@ class Payment extends Base
         //判断支付状态
         if ($attr['return_code'] == 'SUCCESS') {
             $order_sn = substr($out_trade_no, 0, -6);
-            //获取action
-            $action = $attr['attach'];
-            (new logicPayment($action))->notify($order_sn);
+            //获取attach
+            $attach = $attr['attach'];
+            (new logicPayment($attach))->notify($order_sn);
             // 返回状态给微信服务器
             echo "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
         }

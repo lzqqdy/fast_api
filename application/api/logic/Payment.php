@@ -12,8 +12,8 @@ use app\common\library\WxPay;
 
 class Payment extends Base
 {
-    //支付场景对象
-    private $scene;
+    //支付场景对象实例
+    private $instance;
 
     //配置参数
     protected $config = array();
@@ -25,7 +25,7 @@ class Payment extends Base
      */
     public function __construct($scene)
     {
-        $this->scene = $this->payFactoryFunc($scene);
+        $this->instance = $this->payFactoryFunc($scene);
         $this->config = $this->getConfig($scene);
         parent::__construct();
     }
@@ -38,7 +38,7 @@ class Payment extends Base
      */
     public function pay($order_sn, $user_id)
     {
-        $payData = $this->scene->getPayData($order_sn, $user_id);
+        $payData = $this->instance->getPayData($order_sn, $user_id);
         $retData = array_merge($payData, $this->config);
         $data = (new WxPay($retData))->paying();
         return $data;
@@ -50,7 +50,7 @@ class Payment extends Base
      */
     public function notify($order_sn)
     {
-        $this->scene->getNotify($order_sn);
+        $this->instance->getNotify($order_sn);
     }
 
 
