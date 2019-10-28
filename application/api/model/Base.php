@@ -31,6 +31,11 @@ class Base extends Model
     //表相关的具体状态字段命名规则为"table_status"
     protected $insert = ['status' => 1];
 
+    //类型转换
+    protected $type = [
+        'status' => 'integer',
+    ];
+
     // 定义时间戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
