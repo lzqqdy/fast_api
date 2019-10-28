@@ -33,13 +33,16 @@ class Base extends Model
 
     //类型转换
     protected $type = [
-        'status' => 'integer',
+        'status' => 'integer'
     ];
 
     // 定义时间戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
+
+    //数据集
+    protected $resultSetType = 'collection';
 
     /**
      * 图片地址获取器
