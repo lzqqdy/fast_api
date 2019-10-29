@@ -31,7 +31,10 @@ class Index extends Base
         if (!$validate->scene('login')->check($param)) {
             $this->error($validate->getError());
         }
-        $data = $this->logicBanner->getList($param); //使用"逻辑前缀+类名"直接调用逻辑层（logic）里的方法
+        //常规调用
+//        $data = $this->logicBanner->getList($param); //使用"逻辑前缀+类名"直接调用逻辑层（logic）里的方法
+        //自动缓存
+        $data = auto_cache('index_test', create_closure($this->logicBanner, 'getList', ['id','title']), 60);
         $this->success('请求成功', $data); //操作成功返回数据
     }
 

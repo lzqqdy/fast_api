@@ -18,7 +18,7 @@ if (!function_exists('throw_response_exception')) {
 }
 if (!function_exists('str_prefix')) {
     /**
-     * strpos
+     * str_prefix
      * @param $str
      * @param $prefix
      * @return bool
@@ -38,9 +38,43 @@ if (!function_exists('str_rep')) {
         return str_replace($target, $content, $str);
     }
 }
+if (!function_exists('create_closure')) {
+    /**
+     * 通过类创建逻辑闭包
+     * @param null $object
+     * @param string $method_name
+     * @param array $parameter
+     * @return Closure
+     */
+    function create_closure($object = null, $method_name = '', $parameter = [])
+    {
+        $func = function () use ($object, $method_name, $parameter) {
+            return call_user_func_array([$object, $method_name], $parameter);
+        };
+        return $func;
+    }
+}
+if (!function_exists('auto_cache')) {
+    /**
+     * 通过闭包控制缓存
+     * @param string $key
+     * @param string $func
+     * @param int $time
+     * @return mixed
+     */
+    function auto_cache($key = '', $func = '', $time = 3)
+    {
+        $result = cache($key);
+        if (empty($result)) {
+            $result = $func();
+            !empty($result) && cache($key, $result, $time);
+        }
+        return $result;
+    }
+}
 if (!function_exists('replacePicUrl')) {
     /**
-     * 替换fckedit中的图片 添加域名
+     * 替换富文本中的图片 添加域名
      * @param  string $content 要替换的内容
      * @param  string $strUrl 内容中图片要加的域名
      * @return string

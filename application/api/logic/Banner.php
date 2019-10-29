@@ -20,7 +20,7 @@ class Banner extends Base
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getList($param)
+    public function getList($param = [])
     {
         //TODO
         $data = [];
