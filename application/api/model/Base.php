@@ -33,7 +33,7 @@ class Base extends Model
 
     //类型转换
     protected $type = [
-        'status' => 'integer'
+        'status' => 'integer',
     ];
 
     // 定义时间戳字段名
@@ -79,7 +79,7 @@ class Base extends Model
      */
     public function getContentAttr($value)
     {
-        return replacePicUrl($value, request()->domain());
+        return replace_pic_url($value, request()->domain());
     }
 
     /**

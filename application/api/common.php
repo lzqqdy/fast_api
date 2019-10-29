@@ -72,7 +72,7 @@ if (!function_exists('auto_cache')) {
         return $result;
     }
 }
-if (!function_exists('replacePicUrl')) {
+if (!function_exists('replace_pic_url')) {
     /**
      * 替换富文本中的图片 添加域名
      * @param  string $content 要替换的内容
@@ -80,7 +80,7 @@ if (!function_exists('replacePicUrl')) {
      * @return string
      * @eg
      */
-    function replacePicUrl(&$content = null, $strUrl = null)
+    function replace_pic_url(&$content = null, $strUrl = null)
     {
         if ($strUrl) {
             //提取图片路径的src的正则表达式 并把结果存入$matches中
