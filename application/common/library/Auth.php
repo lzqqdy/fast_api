@@ -518,7 +518,7 @@ class Auth
         $allowFields = $this->getAllowFields();
         $userinfo = array_intersect_key($data, array_flip($allowFields));
         $userinfo = array_merge($userinfo, Token::get($this->_token));
-        $userinfo['avatar'] = request()->domain() . $userinfo['avatar'];
+        $userinfo['avatar'] = config('image_domain') . $userinfo['avatar'];
         return $userinfo;
     }
 

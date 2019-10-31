@@ -136,7 +136,7 @@ class Common extends Api
             $attachment->save();
             \think\Hook::listen("upload_after", $attachment);
             $this->success('上传成功', [
-                'url'  => request()->domain() . $uploadDir . $splInfo->getSaveName(),
+                'url'  => config('image_domain') . $uploadDir . $splInfo->getSaveName(),
                 'save' => $uploadDir . $splInfo->getSaveName(),
             ]);
         } else {

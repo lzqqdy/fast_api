@@ -52,7 +52,7 @@ class Base extends Model
      */
     public function getImageAttr($value)
     {
-        return request()->domain() . $value;
+        return config('image_domain') . $value;
     }
 
     /**
@@ -66,7 +66,7 @@ class Base extends Model
         $value = explode(',', $value);
         if (!empty($value)) {
             foreach ($value as &$v) {
-                $v = request()->domain() . $v;
+                $v = config('image_domain') . $v;
             }
         }
         return $value;
@@ -79,7 +79,7 @@ class Base extends Model
      */
     public function getContentAttr($value)
     {
-        return replace_pic_url($value, request()->domain());
+        return replace_pic_url($value, config('image_domain'));
     }
 
     /**
