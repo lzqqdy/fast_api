@@ -8,7 +8,6 @@
 
 namespace app\api\logic;
 
-use think\Request;
 
 /**
  * Class Base
@@ -16,24 +15,11 @@ use think\Request;
  */
 class Base
 {
+    use Error;
+
     public function __construct()
     {
         //TODO
-    }
-
-    /**
-     * 异常返回返回前端
-     * @param $data
-     */
-    protected function apiError($msg = '', $data = null, $code = 0)
-    {
-        $result = [
-            'code' => $code,
-            'msg'  => $msg,
-            'time' => Request::instance()->server('REQUEST_TIME'),
-            'data' => $data,
-        ];
-        return throw_response_exception($result);
     }
 
     /**
