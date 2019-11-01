@@ -233,30 +233,28 @@ class Backend extends Controller
         $this->assign('admin', Session::get('admin'));
     }
 
-    /**
+      /**
      * 加载语言文件
      * @param string $name
      */
     protected function loadlang($name)
     {
-        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.',
-                '/', $name) . '.php');
+        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
     }
 
     /**
      * 渲染配置信息
-     * @param mixed $name 键名或数组
+     * @param mixed $name  键名或数组
      * @param mixed $value 值
      */
     protected function assignconfig($name, $value = '')
     {
-        $this->view->config = array_merge($this->view->config ? $this->view->config : [],
-            is_array($name) ? $name : [$name => $value]);
+        $this->view->config = array_merge($this->view->config ? $this->view->config : [], is_array($name) ? $name : [$name => $value]);
     }
 
     /**
      * 生成查询所需要的条件,排序方式
-     * @param mixed $searchfields 快速查询的字段
+     * @param mixed   $searchfields   快速查询的字段
      * @param boolean $relationSearch 是否关联查询
      * @return array
      */
@@ -267,8 +265,7 @@ class Backend extends Controller
         $search = $this->request->get("search", '');
         $filter = $this->request->get("filter", '');
         $op = $this->request->get("op", '', 'trim');
-        $sort = $this->request->get("sort",
-            !empty($this->model) && $this->model->getPk() ? $this->model->getPk() : 'id');
+        $sort = $this->request->get("sort", !empty($this->model) && $this->model->getPk() ? $this->model->getPk() : 'id');
         $order = $this->request->get("order", "DESC");
         $offset = $this->request->get("offset", 0);
         $limit = $this->request->get("limit", 0);
@@ -280,6 +277,7 @@ class Backend extends Controller
         if ($relationSearch) {
             if (!empty($this->model)) {
                 $name = \think\Loader::parseName(basename(str_replace('\\', '/', get_class($this->model))));
+                $name = $this->model->getTable();
                 $tableName = $name . '.';
             }
             $sortArr = explode(',', $sort);
@@ -328,8 +326,7 @@ class Backend extends Controller
                 case 'FINDIN':
                 case 'FINDINSET':
                 case 'FIND_IN_SET':
-                    $where[] = "FIND_IN_SET('{$v}', " . ($relationSearch ? $k : '`' . str_replace('.', '`.`',
-                                $k) . '`') . ")";
+                    $where[] = "FIND_IN_SET('{$v}', " . ($relationSearch ? $k : '`' . str_replace('.', '`.`', $k) . '`') . ")";
                     break;
                 case 'IN':
                 case 'IN(...)':
@@ -502,7 +499,7 @@ class Backend extends Controller
                 $list[] = [
                     $primarykey => isset($item[$primarykey]) ? $item[$primarykey] : '',
                     $field      => isset($item[$field]) ? $item[$field] : '',
-                    'pid'       => isset($item['pid']) ? $item['pid'] : 0,
+                    'pid'       => isset($item['pid']) ? $item['pid'] : 0
                 ];
             }
             if ($istree && !$primaryvalue) {
