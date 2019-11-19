@@ -6,7 +6,7 @@ class AdminLog
 {
     public function run(&$params)
     {
-        if (request()->isPost()) {
+        if (request()->isPost() || request()->isAjax()) {
             \app\admin\model\AdminLog::record();
         }
     }
