@@ -233,6 +233,19 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'ueditor','editable']
         api: {
             bindevent: function () {
                 Form.api.bindevent($("form[role=form]"));
+                require(['selectpage'], function (SelectPage) {
+                    var _displayResults = $.fn.selectPage.Constructor.prototype.displayResults;
+                    $.fn.selectPage.Constructor.prototype.displayResults = function (self, json, is_query) {
+                        _displayResults.call(this, self, json, is_query);
+                        //这里判断是否为分类列表框，也可移除此判断
+                        if (self.elem.hidden.is("#c-category_id")) {
+                            //判断查询记录是否为0，也可移除此判断
+                            if (json.originalResult.length == 0) {
+                                $(self.elem.results[0]).append("<p class='text-center' style='margin:5px;'><a class='btn btn-xs btn-info btn-dialog' title='添加' data-window='top' href='category/add'>添加一条新的记录</a></p>");
+                            }
+                        }
+                    };
+                });
             }
         }
     };
